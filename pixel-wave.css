@@ -1,0 +1,150 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: auto 0 0;
+  height: 38%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 250, 249, 0) 0%,
+    rgba(255, 250, 249, .18) 28%,
+    rgba(255, 250, 249, .78) 72%,
+    var(--paper) 100%
+  );
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, .25) 30%,
+    rgba(0, 0, 0, .85) 72%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, .25) 30%,
+    rgba(0, 0, 0, .85) 72%,
+    #000 100%
+  );
+}
+
+.hero > .reveal {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0 0 auto;
+  height: 140px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 250, 249, .97) 0%,
+    rgba(255, 250, 249, .9) 38%,
+    rgba(255, 250, 249, .48) 70%,
+    rgba(255, 250, 249, 0) 100%
+  );
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 48%,
+    rgba(0, 0, 0, .72) 72%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 48%,
+    rgba(0, 0, 0, .72) 72%,
+    transparent 100%
+  );
+}
+
+header nav {
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  scroll-margin-top: 140px;
+}
+
+.pixel-wave {
+  position: absolute;
+  z-index: 0;
+  inset: 0 0 auto;
+  width: auto;
+  max-width: none;
+  height: 1024px;
+  display: grid;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+  background: rgba(255, 255, 255, .2);
+  backdrop-filter: blur(10px);
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.pixel-wave__tile {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  background: transparent;
+}
+
+.pixel-wave__tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 0, 0, var(--red-opacity, 0));
+}
+
+.pixel-wave__tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, var(--motion-alpha, 0));
+  transform: var(--motion-transform, none);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+@media (max-width: 1050px) {
+  header::before {
+    height: 112px;
+  }
+
+  section {
+    scroll-margin-top: 112px;
+  }
+
+  .hero::after {
+    height: 42%;
+  }
+
+  .pixel-wave {
+    height: 760px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-wave__tile::after {
+    transform: none !important;
+  }
+}

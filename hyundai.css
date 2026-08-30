@@ -1,0 +1,56 @@
+:root{--hyundai-paper:#fffaf9;--hyundai-date:#c3c3c3;--hyundai-muted:#757575}
+.hyundai-body{min-width:1440px;overflow-x:auto;background:var(--hyundai-paper)}
+.hyundai-canvas{position:relative;width:1440px;height:2252px;margin:0 auto;overflow:hidden;background:var(--hyundai-paper);color:#000;font-family:'Gothic A1',sans-serif;font-weight:400}
+.hyundai-canvas section{position:absolute;padding:0}
+.hyundai-intro{left:145.638px;top:201.548px;width:1124.176px;height:129.032px}
+.hyundai-title{margin:0;font-size:50px;line-height:53.032px;font-weight:500;letter-spacing:0}
+.hyundai-date{margin:12px 0 0;font-size:15px;line-height:19px;font-weight:700;color:var(--hyundai-date)}
+.hyundai-categories{position:relative;display:block;height:25px;margin-top:20px;font-family:'Gothic A1',sans-serif;font-size:20px;line-height:25px;font-weight:500;letter-spacing:0;text-transform:none}
+.hyundai-category{position:absolute;top:0;display:inline-flex;align-items:baseline;white-space:nowrap}
+.hyundai-category:nth-child(1){left:0}
+.hyundai-category:nth-child(2){left:190px}
+.hyundai-tag-bullet{display:inline-block;margin-right:18px;font-family:'Gothic A1',sans-serif;font-size:20px;line-height:25px;font-weight:500}
+.hyundai-section-rule{position:absolute;left:359.734px;top:375.042px;width:2.5px;height:29.232px;background:#000}
+.hyundai-card-grid{left:151.35px;top:398.106px;width:1142.116px;height:551.65px}
+.hyundai-card-news{position:absolute;width:544.558px;height:263.825px;padding:0;overflow:hidden;border:1px solid #d9d9d9;background:#fff;color:inherit;font:inherit;text-align:left;box-shadow:0 1px 3.6px rgba(0,0,0,.25);cursor:pointer}
+.hyundai-card-news:focus-visible{outline:2px solid #000;outline-offset:5px}
+.hyundai-card-news--april{left:0;top:0}.hyundai-card-news--june{left:597.558px;top:0}.hyundai-card-news--october{left:0;top:287.825px}.hyundai-card-news--november{left:597.558px;top:287.825px}
+.hyundai-card-news h3{position:absolute;left:50.535px;top:9.733px;margin:0;font-size:15px;line-height:20.917px;font-weight:400}
+.hyundai-window-dots{position:absolute;left:12.664px;top:11.182px;display:flex;gap:3.857px;width:27.695px;height:6.645px}
+.hyundai-window-dots i{display:block;width:6.66px;height:6.645px;border-radius:50%;background:#ff6950}.hyundai-window-dots i:nth-child(2){background:#ffbc00}.hyundai-window-dots i:nth-child(3){background:#56c000}
+.hyundai-card-strip{position:absolute;left:4.458px;top:37.214px;display:flex;width:535.644px;height:222.754px;overflow:hidden}
+.hyundai-card-image{display:block;flex:0 0 178.548px;width:178.548px;height:222.754px;object-fit:cover}
+.hyundai-reels{inset:0;width:1440px;height:2252px;pointer-events:none}.hyundai-reels>*{pointer-events:auto}
+.hyundai-reels-title{position:absolute;left:135.92px;top:1125.043px;margin:0;scroll-margin-top:110px;font-size:30px;line-height:38px;font-weight:600;letter-spacing:0}
+.hyundai-phone{position:absolute;width:270px;height:595px;border-radius:50px;background:#000;overflow:hidden}
+.hyundai-phone--one{left:262.96px;top:1260px}.hyundai-phone--two{left:585px;top:1260.5px}.hyundai-phone--three{left:907.04px;top:1268.223px}
+.hyundai-phone-screen{position:absolute;left:10px;top:16.5px;width:250px;height:563px;overflow:hidden;border-radius:30px;background:#000}
+.hyundai-phone-screen::before{content:"";position:absolute;z-index:2;left:50%;top:7px;width:82px;height:20px;border-radius:11px;background:#000;transform:translateX(-50%);pointer-events:none}
+.hyundai-phone-screen::after{content:"";position:absolute;z-index:2;left:50%;bottom:7px;width:88px;height:4px;border-radius:2px;background:#fff;transform:translateX(-50%);pointer-events:none}
+.hyundai-reel{position:absolute;left:-8.25px;top:41.198px;display:block;width:266.5px;height:472.61px;object-fit:cover;cursor:pointer}
+.hyundai-phone--two .hyundai-reel{top:59.611px}.hyundai-phone--three .hyundai-reel{left:-3.99px;top:51.195px}
+.hyundai-reel:focus-visible{outline:2px solid #fff;outline-offset:-4px}
+.hyundai-results{inset:0;width:1440px;height:2252px;pointer-events:none}.hyundai-results>*{pointer-events:auto}
+.hyundai-result-date{position:absolute;left:667.556px;top:1971.11px;margin:0;font-size:15px;line-height:19px;font-weight:400;color:var(--hyundai-muted)}
+.hyundai-stat{position:absolute;top:1885.667px;height:63px;color:var(--hyundai-muted)}.hyundai-stat--one{left:298.254px;width:169.579px}.hyundai-stat--two{left:652.598px;width:120.696px}.hyundai-stat--three{left:975.597px;width:119.737px}
+.hyundai-view-icon{position:absolute;left:0;top:22.714px;display:block;width:30.527px;height:17.572px;object-fit:fill}
+.hyundai-stat strong{position:absolute;top:0;display:block;font-family:'Google Sans Flex','Gothic A1',sans-serif;font-size:50px;line-height:63px;font-weight:500;font-optical-sizing:auto;font-variant-numeric:tabular-nums;letter-spacing:0;white-space:nowrap}
+.hyundai-stat--one strong{left:47.579px}.hyundai-stat--two strong{left:40.696px}.hyundai-stat--three strong{left:39.737px}
+.hyundai-description{position:absolute;top:2021px}.hyundai-description--one{left:269.516px;width:258px}.hyundai-description--two{left:607.5px;width:225px}.hyundai-description--three{left:907.04px;top:2016px;width:345.63px}
+.hyundai-description h3{margin:0 0 8px;font-size:15px;line-height:19px;font-weight:500;color:var(--hyundai-muted)}
+.hyundai-description-copy{margin:0;font-size:15px;line-height:19px;font-weight:400;color:#1e1e1e}
+.hyundai-body.is-card-detail-open{overflow:hidden}
+.hyundai-card-detail{position:fixed;z-index:1000;inset:0;width:100vw;height:100dvh;overflow:hidden;background:rgba(173,173,173,.56);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.hyundai-card-detail[hidden]{display:none}
+.hyundai-card-detail-canvas{position:absolute;left:50%;top:calc(50% - 50px);width:1440px;height:1048px;overflow:visible;outline:0;transform:translate(-50%,-50%) scale(var(--hyundai-card-detail-scale));transform-origin:center}
+.hyundai-card-detail-stage{position:absolute;left:0;top:0;width:1440px;height:1024px;overflow:visible}
+.hyundai-card-detail-page{position:absolute;inset:0;width:1440px;height:1024px}
+.hyundai-card-detail-image{position:absolute;display:block;max-width:none;object-fit:fill}
+.hyundai-card-detail-panel{position:absolute}
+.hyundai-card-detail-text{position:absolute;margin:0;font-family:'Gothic A1',sans-serif;line-height:19px;letter-spacing:0;white-space:pre-wrap}
+.hyundai-card-detail-close{position:absolute;z-index:10;left:1562px;top:151.169921875px;width:60px;height:60px;padding:0;border:0;background:transparent;color:#fff;font-family:Inter,sans-serif;font-size:30px;font-weight:400;line-height:60px;text-align:center;text-shadow:0 2px 3px rgba(0,0,0,.35);cursor:pointer}
+.hyundai-card-detail-close:focus-visible{outline:1px solid #fff;outline-offset:6px}
+.hyundai-card-detail.is-opening{animation:hyundai-card-detail-reveal 380ms ease both}
+@keyframes hyundai-card-detail-reveal{from{opacity:0}to{opacity:1}}
+.hyundai-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hyundai-card-detail.is-opening{animation:none}}

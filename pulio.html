@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>PULIO — 김예은 Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;700&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pixel-wave.css">
+  <link rel="stylesheet" href="pulio.css">
+  <script src="pulio-assets.js" defer></script>
+  <script src="pulio-core.js" defer></script>
+  <script src="pulio.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body class="pulio-body">
+  <header class="pulio-header">
+    <nav aria-label="Portfolio navigation">
+      <a href="index.html#home">@yeeunkim</a>
+      <div>
+        <a href="index.html#work">work</a>
+        <a href="index.html#about">about</a>
+        <a href="index.html#contact">contact</a>
+      </div>
+    </nav>
+  </header>
+  <main class="pulio-canvas">
+    <section class="pulio-intro" aria-labelledby="pulio-title">
+      <h1 id="pulio-title">Pulio.</h1>
+      <strong>2026.05~PRESENT</strong>
+      <p><span><span class="pulio-tag-bullet" aria-hidden="true">▪</span>content design</span><span><span class="pulio-tag-bullet" aria-hidden="true">▪</span>design autmomation</span></p>
+    </section>
+    <section class="pulio-da" aria-label="DA content design">
+      <div id="da-gallery" class="pulio-scroll pulio-da-gallery" tabindex="0" aria-label="DA 콘텐츠 디자인 갤러리"></div>
+      <aside class="pulio-da-copy" aria-labelledby="da-title">
+        <h2 id="da-title">① DA content deisgn</h2>
+        <dl>
+          <dt class="pulio-meta-label">CHANNEL</dt><dd class="pulio-meta-copy">Qoo10, Rakuten, Amazon</dd>
+          <dt class="pulio-meta-label">DESCRIPTION</dt><dd class="pulio-meta-copy">유통 채널별 특성에 맞춘 콘텐츠를 디자인했습니다. 광고 성과를 기반으로 비주얼을 지속 개선하고, 일본어 2차 검수와 프로모션 문구 제안까지 참여하며 콘텐츠 완성도를 높였습니다.</dd>
+          <dt class="pulio-meta-label">TOOLS</dt><dd class="pulio-meta-copy">Photoshop, illustrator</dd>
+        </dl>
+      </aside>
+    </section>
+    <section class="pulio-jp" aria-labelledby="jp-title">
+      <h2 id="jp-title">② JP translation</h2>
+      <div id="jp-gallery" class="pulio-scroll pulio-jp-gallery" tabindex="0" aria-label="일본어 번역 상세페이지 갤러리"></div>
+      <div class="pulio-jp-meta">
+        <dl><dt class="pulio-meta-label">DESCRIPTION</dt><dd class="pulio-meta-copy">직역 시 어색한 표현을 문맥에 맞게 의역하고, 카타카나 표기와 일본어 어감을 고려해 자연스러운 제품 상세페이지 번역을 진행했습니다.</dd></dl>
+        <dl><dt class="pulio-meta-label">TOOLS</dt><dd class="pulio-meta-copy">Figma, Photoshop</dd></dl>
+      </div>
+    </section>
+    <section class="pulio-reels" aria-labelledby="reels-title">
+      <h2 id="reels-title">③ Reels&nbsp; video editing</h2>
+      <video class="pulio-video pulio-reel-one" data-video="reelOne" data-click-to-play preload="metadata" playsinline aria-label="9월 메가와리 Reels 영상"></video>
+      <video class="pulio-video pulio-reel-two" data-video="reelTwo" data-click-to-play preload="metadata" playsinline aria-label="아마존 K-뷰티 팝업 Reels 영상"></video>
+      <p class="pulio-reel-caption pulio-reel-caption-one">(1) 9월 메가와리 주목 영상 AD</p>
+      <p class="pulio-reel-caption pulio-reel-caption-two">(2) 아마존 K-뷰티 팝업 영상</p>
+      <div class="pulio-reels-meta">
+        <dl><dt class="pulio-meta-label">DESCRIPTION</dt><dd class="pulio-meta-copy">짧은 시간 안에 핵심 메시지가 전달될 수 있도록 빠른 화면 전환과 텍스트 모션을 활용해 숏폼 콘텐츠를 제작했습니다.</dd></dl>
+        <dl><dt class="pulio-meta-label">TOOLS</dt><dd class="pulio-meta-copy">Capcut</dd></dl>
+      </div>
+    </section>
+    <section class="pulio-workflow" aria-labelledby="workflow-title">
+      <h2 id="workflow-title">work flow.</h2>
+      <img class="pulio-workflow-art pulio-workflow-art-before" src="assets/pulio/workflow/workflow-before.svg" alt="Figma 원본 기존 workflow">
+      <div class="pulio-problem">
+        <h2 class="pulio-problem-title">problem !</h2>
+        <p class="pulio-problem-copy">요소를 순차적으로 배치하며 디자인할 경우,<br>새로운 요소가 추가될 때마다 레이아웃을 반복적으로 재조정해야 했습니다.</p>
+        <h2 class="pulio-solution-title">solution</h2>
+        <p class="pulio-solution-line">디자인 자동화 스킬을 제작해, workflow를 효율적으로 개선했습니다.</p>
+      </div>
+      <section class="pulio-automation-copy">
+        <h2>디자인 자동화 과정</h2>
+        <dl>
+          <dt class="pulio-meta-label">DESIGN ELEMENTS</dt><dd class="pulio-meta-copy">logo, CTA, product, text</dd>
+          <dt class="pulio-meta-label">DESCRIPTION</dt><dd class="pulio-meta-copy">자동화 전용 작업 폴더에 기획안 Excel 파일과 로고·제품 이미지 등의 디자인 에셋을 구성했습니다. AI가 기획안과 에셋을 함께 분석해 필요한 아트보드를 생성하고, 각 콘텐츠에 맞는 제품과 고정 요소를 자동으로 배치하도록 설계했습니다.</dd>
+          <dt class="pulio-meta-label">TOOLS</dt><dd class="pulio-meta-copy">Codex</dd>
+        </dl>
+      </section>
+      <img class="pulio-workflow-folder pulio-workflow-folder-before" src="assets/pulio/workflow/folder-before.svg" alt="" aria-hidden="true">
+      <video class="pulio-video pulio-workflow-before-video" data-video="workflowBefore" data-click-to-play preload="metadata" playsinline aria-label="자동화 이전 workflow 영상"></video>
+      <img class="pulio-workflow-folder pulio-workflow-folder-after" src="assets/pulio/workflow/folder-after.svg" alt="" aria-hidden="true">
+      <video class="pulio-video pulio-workflow-after-video" data-video="workflowAfter" data-click-to-play preload="metadata" playsinline aria-label="자동화 이후 workflow 영상"></video>
+      <div class="pulio-solution-copy">
+        <dl><dt class="pulio-meta-label">DESCRIPTION</dt><dd class="pulio-meta-copy">기획안 Excel 파일을 AI가 분석해 필요한 고정 요소를 자동으로 배치합니다. 텍스트는 아트보드 영역을 벗어나지 않도록 크기를 자동 조정해, 디자이너가 반복적인 세팅 작업에서 벗어나 디자인에 집중할 수 있도록 구성했습니다.</dd></dl>
+        <p class="pulio-disclaimer">*실제 업무 자료 및 코드는 사용하지 않았으며, 포트폴리오를 위해 샘플 데이터 기반으로 별도 구현한 화면입니다.</p>
+      </div>
+      <img class="pulio-workflow-art pulio-workflow-art-after" src="assets/pulio/workflow/workflow-after.svg" alt="Figma 원본 개선 workflow">
+      <dl class="pulio-final-copy"><dt class="pulio-meta-label">DESCRIPTION</dt><dd class="pulio-meta-copy">AI가 반복적인 세팅 작업을 수행하는 동안 전체 레이아웃을 고려한 레퍼런스를 탐색하며, 디자인 방향을 선제적으로 구상할 수 있도록 워크플로우를 개선했습니다.</dd></dl>
+    </section>
+  </main>
+</body>
+</html>
