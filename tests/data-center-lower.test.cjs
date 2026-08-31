@@ -10,6 +10,27 @@ const css = fs.readFileSync(path.join(workspace, 'data-center.css'), 'utf8');
 const js = fs.readFileSync(path.join(workspace, 'data-center.js'), 'utf8');
 const core = require(path.join(workspace, 'data-center-core.js'));
 
+test('the intro places the contribution between the date and project categories', () => {
+  const date = html.indexOf('2025.03~2025.11');
+  const contribution = html.indexOf('class="dc-contribution"');
+  const categories = html.indexOf('<div class="dc-categories">');
+
+  assert.ok(date < contribution, 'contribution must follow the project date');
+  assert.ok(contribution < categories, 'contribution must precede the project categories');
+  assert.match(
+    html,
+    /CONTRIBUTION \| 3D 모델링 및 층별 엑소노메트릭 · UI 디자인 · 모형 제작 전반/,
+  );
+});
+
+test('the intro contribution keeps the date typography and category spacing', () => {
+  assert.match(
+    css,
+    /\.dc-contribution\{[^}]*font-size:15px;[^}]*line-height:19px;[^}]*font-weight:600;/,
+  );
+  assert.match(css, /\.dc-categories\{[^}]*margin-top:20px;/);
+});
+
 test('every physical-model image can toggle selection while unknown targets are ignored', () => {
   const selectableIds = ['model-01', 'model-02', 'model-03', 'model-04', 'model-05'];
   assert.equal(core.togglePhysicalModelSelection(null, 'model-03', selectableIds), 'model-03');
