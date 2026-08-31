@@ -26,6 +26,13 @@ test('Hyundai contribution matches the shared typography and category spacing', 
   assert.match(css, /\.hyundai-categories\{[^}]*margin-top:20px;/);
 });
 
+test('Hyundai omits the stray rule above the card-news grid', () => {
+  const html = read('hyundai.html');
+  const css = read('hyundai.css');
+  assert.doesNotMatch(html, /hyundai-section-rule/);
+  assert.doesNotMatch(css, /\.hyundai-section-rule/);
+});
+
 test('HYUNDAI E&C work entry links to its detail page', () => {
   const html = read('index.html');
   assert.match(html, /<a class="project hyundai-project-link" href="hyundai\.html"[^>]*><strong>HYUNDAI E&amp;C<\/strong>/);

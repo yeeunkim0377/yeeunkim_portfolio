@@ -11,7 +11,6 @@
 .hyundai-category:nth-child(1){left:0}
 .hyundai-category:nth-child(2){left:190px}
 .hyundai-tag-bullet{display:inline-block;margin-right:18px;font-family:'Gothic A1',sans-serif;font-size:20px;line-height:25px;font-weight:500}
-.hyundai-section-rule{position:absolute;left:359.734px;top:375.042px;width:2.5px;height:29.232px;background:#000}
 .hyundai-card-grid{left:151.35px;top:398.106px;width:1142.116px;height:551.65px}
 .hyundai-card-news{position:absolute;width:544.558px;height:263.825px;padding:0;overflow:hidden;border:1px solid #d9d9d9;background:#fff;color:inherit;font:inherit;text-align:left;box-shadow:0 1px 3.6px rgba(0,0,0,.25);cursor:pointer}
 .hyundai-card-news:focus-visible{outline:2px solid #000;outline-offset:5px}
