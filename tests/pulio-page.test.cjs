@@ -17,6 +17,11 @@ test('Pulio places its design contribution between the date and categories', () 
   assert.match(html, /CONTRIBUTION \| 기획안 기반 콘텐츠 디자인 100%/);
 });
 
+test('Pulio names design automation without the intro typo', () => {
+  assert.match(html, />design automation<\/span>/);
+  assert.doesNotMatch(html, /design autmomation/);
+});
+
 test('Pulio contribution matches the Data Center typography and spacing', () => {
   assert.match(html, /Gothic\+A1:wght@100;200;300;400;500;600;700/);
   assert.match(
