@@ -6,6 +6,26 @@ const assert = require('node:assert/strict');
 const workspace = path.resolve(__dirname, '..');
 const read = (file) => fs.readFileSync(path.join(workspace, file), 'utf8');
 
+test('Hyundai places its production contribution between the date and categories', () => {
+  const html = read('hyundai.html');
+  const date = html.indexOf('2025.03~ 2025.11');
+  const contribution = html.indexOf('class="hyundai-contribution"');
+  const categories = html.indexOf('class="hyundai-categories"');
+
+  assert.ok(date < contribution, 'contribution must follow the project date');
+  assert.ok(contribution < categories, 'contribution must precede the project categories');
+  assert.match(html, /CONTRIBUTION \| 카드뉴스 디자인 · 릴스 기획·촬영·편집/);
+});
+
+test('Hyundai contribution matches the shared typography and category spacing', () => {
+  const css = read('hyundai.css');
+  assert.match(
+    css,
+    /\.hyundai-contribution\{[^}]*font-size:15px;[^}]*line-height:19px;[^}]*font-weight:600(?:;|})/,
+  );
+  assert.match(css, /\.hyundai-categories\{[^}]*margin-top:20px;/);
+});
+
 test('HYUNDAI E&C work entry links to its detail page', () => {
   const html = read('index.html');
   assert.match(html, /<a class="project hyundai-project-link" href="hyundai\.html"[^>]*><strong>HYUNDAI E&amp;C<\/strong>/);

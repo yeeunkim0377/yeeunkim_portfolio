@@ -2,9 +2,10 @@
 .hyundai-body{min-width:1440px;overflow-x:auto;background:var(--hyundai-paper)}
 .hyundai-canvas{position:relative;width:1440px;height:2252px;margin:0 auto;overflow:hidden;background:var(--hyundai-paper);color:#000;font-family:'Gothic A1',sans-serif;font-weight:400}
 .hyundai-canvas section{position:absolute;padding:0}
-.hyundai-intro{left:145.638px;top:201.548px;width:1124.176px;height:129.032px}
+.hyundai-intro{left:145.638px;top:201.548px;width:1124.176px;height:148.032px}
 .hyundai-title{margin:0;font-size:50px;line-height:53.032px;font-weight:500;letter-spacing:0}
 .hyundai-date{margin:12px 0 0;font-size:15px;line-height:19px;font-weight:700;color:var(--hyundai-date)}
+.hyundai-contribution{margin:0;color:var(--hyundai-date);font-size:15px;line-height:19px;font-weight:600}
 .hyundai-categories{position:relative;display:block;height:25px;margin-top:20px;font-family:'Gothic A1',sans-serif;font-size:20px;line-height:25px;font-weight:500;letter-spacing:0;text-transform:none}
 .hyundai-category{position:absolute;top:0;display:inline-flex;align-items:baseline;white-space:nowrap}
 .hyundai-category:nth-child(1){left:0}

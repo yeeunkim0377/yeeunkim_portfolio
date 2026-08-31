@@ -2,11 +2,12 @@
 .pulio-body{min-width:1440px;overflow-x:auto;background:var(--pulio-paper)}
 .pulio-canvas{position:relative;width:1440px;height:4097px;margin:0 auto;padding:0;background:var(--pulio-paper);overflow:hidden;font-family:'Gothic A1',sans-serif;color:#000;font-weight:400}
 .pulio-canvas section{position:absolute;padding:0;scroll-margin-top:140px}
-.pulio-intro{left:145.638px;top:201.548px;width:1124.176px;height:129.032px}
+.pulio-intro{left:145.638px;top:201.548px;width:1124.176px;height:148.032px}
 .pulio-intro h1{position:absolute;left:0;top:0;margin:0;font-size:50px;line-height:53px;font-weight:500}
 .pulio-intro strong{position:absolute;left:0;top:65.033px;color:var(--pulio-date);font-size:15px;line-height:19px;font-weight:700}
-.pulio-intro p{position:absolute;left:0;top:104.033px;display:flex;gap:30px;margin:0;font-size:20px;line-height:25px;font-weight:500}
-.pulio-intro p>span{display:inline-flex;align-items:baseline}
+.pulio-contribution{position:absolute;left:0;top:84.033px;margin:0;color:var(--pulio-date);font-size:15px;line-height:19px;font-weight:600}
+.pulio-categories{position:absolute;left:0;top:123.033px;display:flex;gap:30px;margin:0;font-size:20px;line-height:25px;font-weight:500}
+.pulio-categories>span{display:inline-flex;align-items:baseline}
 .pulio-tag-bullet{display:inline-block;margin-right:18px;font-family:'Gothic A1',sans-serif;font-size:20px;line-height:25px;font-weight:500}
 .pulio-canvas h2{margin:0;font-size:20px;line-height:25px;font-weight:500}
 .pulio-canvas dl{margin:38px 0 0}
