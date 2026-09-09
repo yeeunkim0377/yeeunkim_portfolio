@@ -26,9 +26,186 @@ projects.forEach((button) => {
   });
 });
 
-const infoSections = document.querySelectorAll('.info-section');
+(() => {
+  const reel = document.querySelector('[data-pulio-da-reel]');
+  const track = reel?.querySelector('.pulio-da-track');
+  const core = window.HomeReelCore;
+  if (!reel || !track || !core) return;
 
-document.querySelectorAll('.project[data-project="PLEATS MAMA"]').forEach((project) => project.remove());
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const dataCenterImages = [
+    { file: '07b224d1a42de03d5813255aaad61ddeef3c223a.png' },
+    { file: '1fa4582d43b7ce79a1bdb6368ddfd9f975e32b30.png' },
+    { file: '5ff1329122835b6573924f4433a16d9ff3dde325.png' },
+    { file: '6d748280a7354fbba2fb3087f7808cb798181ab2.png' },
+    { file: '7304c4477e0fc69b94af869a87a8fda9c580b753.jpg' },
+    { file: '87b2a8f8525f9c25fef3e576adc1902aa94fc8f7.png' },
+    { file: 'b5a8cadfbc4ea3197df827410380bcaa4ac55de8.png' },
+    { file: 'c95348b5292a7793cb148cf4d3b95338b9f0ae9d.png' },
+    { file: 'e85427fb4450391ca08f19826c60cff6539b5f50.png' }
+  ];
+  const hyundaiImages = [
+    { file: '4.jpg' },
+    { file: '6.jpg' },
+    { file: '10.jpg' },
+    { file: '11.jpg' }
+  ];
+  const pleatsImages = [
+    { file: '1.png' },
+    { file: '59ef942f17f13c16104725ddd7c4a34137a5565c.png' },
+    { file: '7b287e9f512745548fa3ab8f01370e9f1426bfe7.png' },
+    { file: 'd0f87fb0bf2c4d1c28c6b833f9fd0b5a1ddf6e25.png' },
+    { file: 'fe190d8412f370a5b6578b479b5d742dff61d38c.png' }
+  ];
+  const recent = [];
+  let deck = [];
+  let mode = 'pulio';
+
+  const nextNumber = () => {
+    if (!deck.length) deck = core.createDeck(47, 10, Math.random, recent.slice(-3));
+    const number = deck.shift();
+    recent.push(number);
+    if (recent.length > 10) recent.shift();
+    return number;
+  };
+
+  const createPulioImage = () => {
+    const number = String(nextNumber()).padStart(2, '0');
+    const image = document.createElement('img');
+    image.src = `assets/pulio/da/da-${number}.png`;
+    image.alt = '';
+    image.decoding = 'async';
+    image.loading = 'eager';
+    return image;
+  };
+
+  const createDataCenterImage = (item) => {
+    const frame = document.createElement('span');
+    const image = document.createElement('img');
+    frame.className = 'data-center-reel-image';
+    image.src = `assets/data-center/scroll/${item.file}`;
+    image.alt = '';
+    image.decoding = 'async';
+    image.loading = 'eager';
+    frame.appendChild(image);
+    return frame;
+  };
+
+  const createHyundaiImage = (item) => {
+    const image = document.createElement('img');
+    image.className = 'hyundai-reel-image';
+    image.src = `assets/hyundai/scroll/${item.file}`;
+    image.alt = '';
+    image.decoding = 'async';
+    image.loading = 'eager';
+    return image;
+  };
+
+  const createPleatsImage = (item) => {
+    const image = document.createElement('img');
+    image.className = 'pleats-reel-image';
+    image.src = `assets/pleats-mama/scroll/${item.file}`;
+    image.alt = '';
+    image.decoding = 'async';
+    image.loading = 'eager';
+    return image;
+  };
+
+  const stop = () => {
+    track.style.transition = 'none';
+    track.style.transform = 'translateY(0)';
+  };
+
+  const fillPulio = () => {
+    mode = 'pulio';
+    stop();
+    track.replaceChildren();
+    reel.classList.remove('is-data-center', 'is-hyundai', 'is-pleats');
+    for (let index = 0; index < 4; index += 1) track.appendChild(createPulioImage());
+    void track.offsetHeight;
+    if (!reducedMotion.matches) requestAnimationFrame(advance);
+  };
+
+  const fillDataCenter = () => {
+    if (mode === 'data-center') return;
+    mode = 'data-center';
+    stop();
+    track.replaceChildren(...dataCenterImages.map(createDataCenterImage));
+    reel.classList.remove('is-hyundai', 'is-pleats');
+    reel.classList.add('is-data-center');
+    void track.offsetHeight;
+    if (!reducedMotion.matches) requestAnimationFrame(advance);
+  };
+
+  const fillHyundai = () => {
+    if (mode === 'hyundai') return;
+    mode = 'hyundai';
+    stop();
+    track.replaceChildren(...hyundaiImages.map(createHyundaiImage));
+    reel.classList.remove('is-data-center', 'is-pleats');
+    reel.classList.add('is-hyundai');
+    void track.offsetHeight;
+    if (!reducedMotion.matches) requestAnimationFrame(advance);
+  };
+
+  const fillPleats = () => {
+    if (mode === 'pleats') return;
+    mode = 'pleats';
+    stop();
+    track.replaceChildren(...pleatsImages.map(createPleatsImage));
+    reel.classList.remove('is-data-center', 'is-hyundai');
+    reel.classList.add('is-pleats');
+    void track.offsetHeight;
+    if (!reducedMotion.matches) requestAnimationFrame(advance);
+  };
+
+  const advance = () => {
+    const firstImage = track.firstElementChild;
+    if (!firstImage) return;
+    const distance = firstImage.getBoundingClientRect().height + 20;
+    track.style.transition = `transform ${Math.round(distance * 7)}ms linear`;
+    track.style.transform = `translateY(-${distance}px)`;
+  };
+
+  track.addEventListener('transitionend', (event) => {
+    if (event.propertyName !== 'transform') return;
+    const firstImage = track.firstElementChild;
+    track.style.transition = 'none';
+    track.style.transform = 'translateY(0)';
+    if (mode !== 'pulio') {
+      if (firstImage) track.appendChild(firstImage);
+    } else {
+      firstImage?.remove();
+      track.appendChild(createPulioImage());
+    }
+    void track.offsetHeight;
+    requestAnimationFrame(advance);
+  });
+
+  document.querySelectorAll('[data-project="DATA CENTER"]').forEach((project) => {
+    project.addEventListener('mouseenter', fillDataCenter);
+    project.addEventListener('focus', fillDataCenter);
+  });
+
+  document.querySelectorAll('[data-project="PULIO JAPAN TEAM"]').forEach((project) => {
+    project.addEventListener('mouseenter', fillPulio);
+    project.addEventListener('focus', fillPulio);
+  });
+
+  document.querySelectorAll('.hyundai-project-link').forEach((project) => {
+    project.addEventListener('mouseenter', fillHyundai);
+    project.addEventListener('focus', fillHyundai);
+  });
+
+  document.querySelectorAll('.pleats-project-link').forEach((project) => {
+    project.addEventListener('mouseenter', fillPleats);
+    project.addEventListener('focus', fillPleats);
+  });
+
+  fillPulio();
+})();
+
+const infoSections = document.querySelectorAll('.info-section');
 
 infoSections.forEach((section) => {
   const trigger = section.querySelector('.info-trigger');

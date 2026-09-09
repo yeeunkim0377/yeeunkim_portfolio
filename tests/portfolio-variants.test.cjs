@@ -71,3 +71,21 @@ test('both profile images carry the centered Yeeun Kim caption below the image',
     /\.portrait-name\{[^}]*position:absolute;[^}]*top:508\.5px;[^}]*width:318\.964px;[^}]*text-align:center;[^}]*font-family:'Gothic A1',sans-serif;[^}]*font-size:20px;[^}]*font-weight:400;/,
   );
 });
+
+test('both Work lists end with the animated Pleats Mama Store entry', () => {
+  const script = fs.readFileSync(path.join(workspace, 'script.js'), 'utf8');
+
+  for (const filename of ['index.html', 'spatial.html']) {
+    const html = fs.readFileSync(path.join(workspace, filename), 'utf8');
+    const hyundai = html.indexOf('<strong>HYUNDAI E&amp;C</strong>');
+    const pleats = html.indexOf('<strong>PLEATS MAMA STORE</strong>');
+
+    assert.ok(hyundai < pleats, `${filename}: Pleats Mama Store must be the final project`);
+    assert.match(
+      html,
+      /<a class="project pleats-project-link" href="pleats-mama\.html" aria-label="PLEATS MAMA STORE 프로젝트 상세 페이지로 이동"><strong>PLEATS MAMA STORE<\/strong><span class="details"><span>first offline store<\/span><\/span><\/a>/,
+    );
+  }
+
+  assert.doesNotMatch(script, /PLEATS MAMA[^\n]*\.remove\(\)/);
+});

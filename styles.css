@@ -5,5 +5,17 @@ html.interactive-cursor-active,html.interactive-cursor-active *{cursor:none!impo
 /* Home hint aligns with the role label and sits 9px below it. */
 .hero .hero-hint{font-family:'Gothic A1',sans-serif;font-size:15px;line-height:1.5;margin:9px 0 0;text-align:left}
 
-/* Keep the existing work grid while removing the preview artwork and copy. */
-.work>.preview{visibility:hidden}
+/* Pulio DA reel: three square images flow upward with transparent outer edges. */
+.work>.preview{--reel-image-width:450px;visibility:visible;align-items:center;justify-content:flex-start;padding-top:58px}
+.pulio-da-reel{position:relative;width:590px;height:720px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18%,#000 82%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 18%,#000 82%,transparent 100%)}
+.pulio-da-track{position:absolute;left:25px;top:-185px;width:350px;display:flex;flex-direction:column;gap:20px;will-change:transform}
+.pulio-da-track img{display:block;width:350px;height:350px;flex:0 0 350px;border-radius:10px;object-fit:cover}
+.pulio-da-reel.is-data-center .pulio-da-track{left:25px;top:-130px;width:var(--reel-image-width)}
+.pulio-da-reel.is-data-center .data-center-reel-image{display:block;width:450px;height:auto;flex:none;overflow:hidden;border-radius:10px}
+.pulio-da-reel.is-data-center .data-center-reel-image img{display:block;width:100%;height:auto;border-radius:10px;object-fit:contain}
+.pulio-da-reel.is-hyundai .pulio-da-track{left:25px;top:-130px;width:540px}
+.pulio-da-reel.is-hyundai .hyundai-reel-image{display:block;width:540px;height:263.83px;flex:0 0 263.83px;border-radius:0;object-fit:cover}
+.pulio-da-reel.is-pleats .pulio-da-track{left:25px;top:-130px;width:450px}
+.pulio-da-reel.is-pleats .pleats-reel-image{display:block;width:450px;height:auto;flex:none;border-radius:10px;object-fit:contain}
+.work{grid-template-columns:minmax(340px,1fr) 590px}
+@media(max-width:1050px){.work{grid-template-columns:1fr}}
