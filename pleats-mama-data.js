@@ -5089,7 +5089,7 @@
       {
         id: '24:531',
         type: 'TEXT',
-        name: '“ “일과 일상 사이, 나다움을 발견하는 공간” “',
+        name: '“일과 일상 사이, 나다움을 발견하는 공간”',
         visible: true,
         opacity: 1,
         transform: {
@@ -5114,7 +5114,7 @@
         src: null,
         imageScaleMode: 'FILL',
         fillTransform: null,
-        text: '“ “일과 일상 사이, 나다움을 발견하는 공간” “',
+        text: '“일과 일상 사이, 나다움을 발견하는 공간”',
         fontFamily: 'Gothic A1',
         fontSize: 25,
         fontWeight: 700,

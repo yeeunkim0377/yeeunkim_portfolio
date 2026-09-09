@@ -5,11 +5,12 @@ const assert = require('node:assert/strict');
 
 const workspace = path.resolve(__dirname, '..');
 
-test('the original portfolio remains the UX/UI Designer version', () => {
+test('the main portfolio uses the concise Designer identity', () => {
   const html = fs.readFileSync(path.join(workspace, 'index.html'), 'utf8');
 
-  assert.match(html, /<title>김예은 — UX\/UI Designer<\/title>/);
-  assert.match(html, /<p>UX\/UI Designer 김예은<\/p>/);
+  assert.match(html, /<title>김예은 — Designer<\/title>/);
+  assert.match(html, /<p>Designer 김예은<\/p>/);
+  assert.doesNotMatch(html, /UX\/UI Designer/);
 });
 
 test('the spatial portfolio has its own page and designer identity', () => {

@@ -27,6 +27,13 @@ function findLayer(layers, id) {
   return null;
 }
 
+test('Pleats concept quote has exactly one pair of quotation marks', () => {
+  const source = read('pleats-mama-data.js');
+
+  assert.match(source, /“일과 일상 사이, 나다움을 발견하는 공간”/);
+  assert.doesNotMatch(source, /“\s*“일과 일상 사이, 나다움을 발견하는 공간”\s*“/);
+});
+
 test('Pleats uses the fixed 1440 by 3600 clipped canvas', () => {
   const html = read('pleats-mama.html');
   const css = read('pleats-mama.css');
