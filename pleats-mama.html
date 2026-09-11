@@ -9,15 +9,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700&amp;family=Raleway:wght@300;400&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="pleats-mama.css">
+  <script defer src="i18n-core.js"></script>
+  <script defer src="i18n-translations.js"></script>
   <script defer src="pleats-mama-data.js"></script>
   <script defer src="pleats-mama-core.js"></script>
   <script defer src="pleats-mama.js"></script>
 </head>
-<body class="pleats-body">
+<body class="pleats-body" data-i18n-title="pleats.title">
   <header class="pleats-header">
     <nav aria-label="Portfolio navigation">
       <a href="index.html#home">@yeeunkim</a>
-      <div><a href="index.html#work">work</a><a href="index.html#about">about</a><a href="index.html#contact">contact</a></div>
+      <div><a href="index.html#work">work</a><a href="index.html#about">about</a><a href="index.html#contact">contact</a><span class="language-switcher" role="group" aria-label="언어 선택" data-i18n="common.language.label" data-i18n-attr="aria-label"><button type="button" data-language="ko" aria-pressed="true">KR</button><button type="button" data-language="en" aria-pressed="false">EN</button></span></div>
     </nav>
   </header>
 

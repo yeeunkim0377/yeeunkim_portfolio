@@ -10,16 +10,18 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="pixel-wave.css">
   <link rel="stylesheet" href="data-center.css">
+  <script defer src="i18n-core.js"></script>
+  <script defer src="i18n-translations.js"></script>
   <script defer src="data-center-core.js"></script>
   <script defer src="data-center-detail-data.js"></script>
   <script defer src="data-center.js"></script>
   <script defer src="script.js"></script>
 </head>
-<body class="data-center-body">
+<body class="data-center-body" data-i18n-title="dc.title">
   <header class="data-center-header">
     <nav aria-label="Portfolio navigation">
       <a href="index.html#home">@yeeunkim</a>
-      <div><a href="index.html#work">work</a><a href="index.html#about">about</a><a href="index.html#contact">contact</a></div>
+      <div><a href="index.html#work">work</a><a href="index.html#about">about</a><a href="index.html#contact">contact</a><span class="language-switcher" role="group" aria-label="언어 선택" data-i18n="common.language.label" data-i18n-attr="aria-label"><button type="button" data-language="ko" aria-pressed="true">KR</button><button type="button" data-language="en" aria-pressed="false">EN</button></span></div>
     </nav>
   </header>
   <main class="data-center-main">
@@ -27,7 +29,7 @@
       <div class="data-center-viewport">
         <div class="data-center-track" data-carousel-track>
         <article class="data-center-slide data-center-slide--one" data-slide="1">
-          <div class="dc-site-copy"><b>SITE</b><p>대구 중구 동성로 30, 대구백화점</p><b>DESCRIPTION</b><p>도심 속 유휴 공간으로 남겨진 대구백화점을 문화 플랫폼으로<br>전환하고, 시민과 도시를 연결하는 접점을 UI적 시각으로 설계한 프로젝트입니다.</p></div>
+          <div class="dc-site-copy"><b>SITE</b><p data-i18n="dc.site">대구 중구 동성로 30, 대구백화점</p><b>DESCRIPTION</b><p data-i18n="dc.overview">도심 속 유휴 공간으로 남겨진 대구백화점을 문화 플랫폼으로<br>전환하고, 시민과 도시를 연결하는 접점을 UI적 시각으로 설계한 프로젝트입니다.</p></div>
           <div class="dc-location" aria-label="대구백화점 위치 다이어그램">
             <img class="dc-location-map" src="assets/data-center/slide-1-map.png" alt="대구 지도">
             <div class="dc-location-site-frame"><img class="dc-location-site" src="assets/data-center/slide-1-site.png" alt="대구백화점 위성 이미지"></div>
@@ -39,16 +41,16 @@
         <article class="data-center-slide data-center-slide--two" data-slide="2">
           <img class="dc-full-image dc-section-image" src="assets/data-center/slide-2-section.jpg" alt="DATA CENTER 단면 투시도">
           <div class="dc-gradient dc-gradient--section" aria-hidden="true"></div>
-          <div class="dc-caption dc-section-caption"><b>SECTION</b><p>수직적으로 배치된 데이터 서버랙과<br>에스컬레이터 코어 공간이 드러납니다.</p></div>
+          <div class="dc-caption dc-section-caption"><b>SECTION</b><p data-i18n="dc.section">수직적으로 배치된 데이터 서버랙과<br>에스컬레이터 코어 공간이 드러납니다.</p></div>
         </article>
         <article class="data-center-slide data-center-slide--three" data-slide="3">
           <div class="dc-gradient dc-gradient--axon-underlay" aria-hidden="true"></div>
           <img class="dc-full-image dc-axon-image" src="assets/data-center/slide-3-axonometric.jpg" alt="DATA CENTER 액소노메트릭">
           <div class="dc-gradient dc-gradient--axon-overlay" aria-hidden="true"></div>
-          <div class="dc-caption dc-axon-caption"><b>AXONOMETRIC</b><p>데이터를 저장하는 기존 데이터센터의 역할을 넘어, 드론을 통해 도시의 데이터를 직접 수집하고 축적하는 미래형 문화시설을 제안했습니다.</p></div>
+          <div class="dc-caption dc-axon-caption"><b>AXONOMETRIC</b><p data-i18n="dc.axon">데이터를 저장하는 기존 데이터센터의 역할을 넘어, 드론을 통해 도시의 데이터를 직접 수집하고 축적하는 미래형 문화시설을 제안했습니다.</p></div>
         </article>
         <article class="data-center-slide data-center-slide--one" data-clone="1" aria-hidden="true">
-          <div class="dc-site-copy"><b>SITE</b><p>대구 중구 동성로 30, 대구백화점</p><b>DESCRIPTION</b><p>도심 속 유휴 공간으로 남겨진 대구백화점을 문화 플랫폼으로<br>전환하고, 시민과 도시를 연결하는 접점을 UI적 시각으로 설계한 프로젝트입니다.</p></div>
+          <div class="dc-site-copy"><b>SITE</b><p data-i18n="dc.site">대구 중구 동성로 30, 대구백화점</p><b>DESCRIPTION</b><p data-i18n="dc.overview">도심 속 유휴 공간으로 남겨진 대구백화점을 문화 플랫폼으로<br>전환하고, 시민과 도시를 연결하는 접점을 UI적 시각으로 설계한 프로젝트입니다.</p></div>
           <div class="dc-location" aria-hidden="true"><img class="dc-location-map" src="assets/data-center/slide-1-map.png" alt=""><div class="dc-location-site-frame"><img class="dc-location-site" src="assets/data-center/slide-1-site.png" alt=""></div><img class="dc-location-vector" src="assets/data-center/location-diagram.svg" alt=""></div>
           <div class="dc-past-frame"><img class="dc-past" src="assets/data-center/slide-1-past.jpg" alt=""></div><img class="dc-current" src="assets/data-center/slide-1-current.png" alt="">
         </article>
@@ -57,7 +59,7 @@
       <div class="dc-intro">
         <h1>DATA CENTER.</h1>
         <strong>2025.03~2025.11</strong>
-        <p class="dc-contribution">CONTRIBUTION | 3D 모델링 및 층별 엑소노메트릭 · UI 디자인 · 모형 제작 전반</p>
+        <p class="dc-contribution" data-i18n="dc.contribution">CONTRIBUTION | 3D 모델링 및 층별 엑소노메트릭 · UI 디자인 · 모형 제작 전반</p>
         <div class="dc-categories">
           <span><span class="dc-tag-bullet" aria-hidden="true">▪</span>spatial design</span>
           <span><span class="dc-tag-bullet" aria-hidden="true">▪</span>ui design</span>
@@ -130,24 +132,24 @@
       <button class="dc-model-shot dc-model-shot--four" type="button" data-model-selectable="model-04" aria-expanded="false"><img class="dc-figma-image" src="assets/data-center/model-04.jpg" alt="데이터 센터 모형 저층부 모습"></button>
       <button class="dc-model-shot dc-model-shot--five" type="button" data-model-selectable="model-05" aria-expanded="false"><img class="dc-figma-image" src="assets/data-center/model-05.jpg" alt="데이터 센터 모형 내부 모습"></button>
       <div class="dc-model-description" id="description-01" data-model-description="description-01" aria-hidden="true">
-        <h3>본관 모형 단면 모델</h3>
-        <p>본관 모형의 단면 모델을 제작했습니다. 기존 백화점의 수직 엘리베이터 코어,<br>드론 스테이션, 각 공간의 컨셉과 역할을 한눈에 확인할 수 있는 임팩트 있는<br>모형입니다.</p>
+        <h3 data-i18n="dc.mainModel">본관 모형 단면 모델</h3>
+        <p data-i18n="dc.mainModelDesc">본관 모형의 단면 모델을 제작했습니다. 기존 백화점의 수직 엘리베이터 코어,<br>드론 스테이션, 각 공간의 컨셉과 역할을 한눈에 확인할 수 있는 임팩트 있는<br>모형입니다.</p>
       </div>
       <div class="dc-model-description" id="description-02" data-model-description="description-02" aria-hidden="true">
-        <h3>신관 모형 단면 모델</h3>
-        <p>신관의 데이터 센터 서버들이 수직적으로 배치된 모습을 한눈에 확인할 수 있으며, 본 건물이 데이터센터라는 정체성을 드러내고 있습니다.<br>곳곳에 배치된 사람 모형을 통해, 열려있는 데이터 센터라는 인식을 줍니다.</p>
+        <h3 data-i18n="dc.annexModel">신관 모형 단면 모델</h3>
+        <p data-i18n="dc.annexModelDesc">신관의 데이터 센터 서버들이 수직적으로 배치된 모습을 한눈에 확인할 수 있으며, 본 건물이 데이터센터라는 정체성을 드러내고 있습니다.<br>곳곳에 배치된 사람 모형을 통해, 열려있는 데이터 센터라는 인식을 줍니다.</p>
       </div>
       <div class="dc-model-description" id="description-03" data-model-description="description-03" aria-hidden="true">
-        <h3>본관 - 신관 모형 단면 모델</h3>
-        <p>본관과 신관의 건물 단면 입니다.</p>
+        <h3 data-i18n="dc.bothModel">본관 - 신관 모형 단면 모델</h3>
+        <p data-i18n="dc.bothModelDesc">본관과 신관의 건물 단면 입니다.</p>
       </div>
       <div class="dc-model-description" id="description-04" data-model-description="description-04" aria-hidden="true">
-        <h3>사이트 모형 모델</h3>
-        <p>건축물이 실제 동성로에 배치된 사이트 모형입니다. 1/150 스케일로 제작되었으며, 드론이 곳곳에 돌아다니고 있는 모습입니다.</p>
+        <h3 data-i18n="dc.siteModel">사이트 모형 모델</h3>
+        <p data-i18n="dc.siteModelDesc">건축물이 실제 동성로에 배치된 사이트 모형입니다. 1/150 스케일로 제작되었으며, 드론이 곳곳에 돌아다니고 있는 모습입니다.</p>
       </div>
       <div class="dc-model-description" id="description-05" data-model-description="description-05" aria-hidden="true">
-        <h3>수직 동선 아크릴 모형</h3>
-        <p>지하 1개층, 지상 9개층으로 총 10층의 건물이 어떻게 수직적으로 연결되어 있는지를 나타낸 모형입니다. 코어는 민트색으로 표현, 데이터 센터 서버는 메인 블루 컬러를 적용시켜 10개의 층이 모두 연결되어있음을 확인할 수 있습니다.</p>
+        <h3 data-i18n="dc.verticalModel">수직 동선 아크릴 모형</h3>
+        <p data-i18n="dc.verticalModelDesc">지하 1개층, 지상 9개층으로 총 10층의 건물이 어떻게 수직적으로 연결되어 있는지를 나타낸 모형입니다. 코어는 민트색으로 표현, 데이터 센터 서버는 메인 블루 컬러를 적용시켜 10개의 층이 모두 연결되어있음을 확인할 수 있습니다.</p>
       </div>
       <a class="dc-proposal-download" href="assets/data-center/data%20center_proposal.pdf" download="data-center_proposal.pdf" aria-label="DATA CENTER proposal PDF 다운로드">
         <span>PROPOSAL DOWNLOAD</span><i aria-hidden="true"></i>

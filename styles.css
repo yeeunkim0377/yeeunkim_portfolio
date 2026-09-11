@@ -19,3 +19,7 @@ html.interactive-cursor-active,html.interactive-cursor-active *{cursor:none!impo
 .pulio-da-reel.is-pleats .pleats-reel-image{display:block;width:450px;height:auto;flex:none;border-radius:10px;object-fit:contain}
 .work{grid-template-columns:minmax(340px,1fr) 590px}
 @media(max-width:1050px){.work{grid-template-columns:1fr}}
+.language-switcher{display:inline-flex;overflow:hidden;border:1px solid #000;border-radius:5px;font:inherit;line-height:1}
+.language-switcher button{min-width:30px;border:0;padding:3px 6px;background:transparent;color:#000;font:inherit;line-height:1;cursor:pointer}
+.language-switcher button[aria-pressed="true"]{background:#000;color:#fff}
+.language-switcher button:focus-visible{position:relative;z-index:1;outline:2px solid #000;outline-offset:-2px}

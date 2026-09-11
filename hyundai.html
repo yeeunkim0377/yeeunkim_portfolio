@@ -9,14 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@500&amp;family=Gothic+A1:wght@400;500;600;700&amp;family=Raleway:wght@300;400&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="hyundai.css">
+  <script defer src="i18n-core.js"></script>
+  <script defer src="i18n-translations.js"></script>
   <script defer src="hyundai-card-detail-data.js"></script>
   <script defer src="hyundai.js"></script>
 </head>
-<body class="hyundai-body">
+<body class="hyundai-body" data-i18n-title="hyundai.title">
   <header class="hyundai-header">
     <nav aria-label="Portfolio navigation">
       <a href="index.html#home">@yeeunkim</a>
-      <div><a href="index.html#work">work</a><a href="index.html#about">about</a><a href="index.html#contact">contact</a></div>
+      <div><a href="index.html#work">work</a><a href="index.html#about">about</a><a href="index.html#contact">contact</a><span class="language-switcher" role="group" aria-label="언어 선택" data-i18n="common.language.label" data-i18n-attr="aria-label"><button type="button" data-language="ko" aria-pressed="true">KR</button><button type="button" data-language="en" aria-pressed="false">EN</button></span></div>
     </nav>
   </header>
 
@@ -24,7 +26,7 @@
     <section class="hyundai-intro" aria-labelledby="hyundai-title">
       <h1 class="hyundai-title" id="hyundai-title">HYUNDAI E&amp;C</h1>
       <p class="hyundai-date">2025.03~ 2025.11</p>
-      <p class="hyundai-contribution">CONTRIBUTION | 카드뉴스 디자인 · 릴스 기획·촬영·편집</p>
+      <p class="hyundai-contribution" data-i18n="hyundai.contribution">CONTRIBUTION | 카드뉴스 디자인 · 릴스 기획·촬영·편집</p>
       <div class="hyundai-categories" aria-label="Hyundai 프로젝트 콘텐츠 목록">
         <span class="hyundai-category"><span class="hyundai-tag-bullet" aria-hidden="true">▪</span>sns card news</span>
         <span class="hyundai-category"><span class="hyundai-tag-bullet" aria-hidden="true">▪</span>reels video editing</span>
@@ -81,13 +83,13 @@
     </section>
 
     <section class="hyundai-results" aria-label="Reels 성과와 설명">
-      <p class="hyundai-result-date">2026.08.24기준</p>
+      <p class="hyundai-result-date" data-i18n="hyundai.date">2026.08.24기준</p>
       <div class="hyundai-stat hyundai-stat--one" aria-label="조회수 1,048"><img class="hyundai-view-icon" decoding="async" src="assets/hyundai/view.png" alt=""><strong data-count="1048">1,048</strong></div>
       <div class="hyundai-stat hyundai-stat--two" aria-label="조회수 874"><img class="hyundai-view-icon" decoding="async" src="assets/hyundai/view.png" alt=""><strong data-count="874">874</strong></div>
       <div class="hyundai-stat hyundai-stat--three" aria-label="조회수 474"><img class="hyundai-view-icon" decoding="async" src="assets/hyundai/view.png" alt=""><strong data-count="474">474</strong></div>
-      <article class="hyundai-description hyundai-description--one"><h3>DESCRIPTION</h3><p class="hyundai-description-copy">현대건설이 진행중인 대형 토목 현장을 직접 취재했습니다. 현대건설의 인프라, 기술력, 참여자들의 전후 변화를 중점적으로 취재했습니다.</p></article>
-      <article class="hyundai-description hyundai-description--two"><h3>DESCRIPTION</h3><p class="hyundai-description-copy">현대건설이 진행하는 단체활동을 일기 형식의 디자인으로 취재했습니다.</p></article>
-      <article class="hyundai-description hyundai-description--three"><h3>DESCRIPTION</h3><p class="hyundai-description-copy">대학생 멘토가 활동 중반이 지난 시점에 모여<br>자신의 활동, 성과를 공유하는 시간을 가졌습니다.<br>한명의 멘토와 인터뷰를 진행해 활동의 취지를<br>전달하는 릴스를 제작했습니다.</p></article>
+      <article class="hyundai-description hyundai-description--one"><h3>DESCRIPTION</h3><p class="hyundai-description-copy" data-i18n="hyundai.desc1">현대건설이 진행중인 대형 토목 현장을 직접 취재했습니다. 현대건설의 인프라, 기술력, 참여자들의 전후 변화를 중점적으로 취재했습니다.</p></article>
+      <article class="hyundai-description hyundai-description--two"><h3>DESCRIPTION</h3><p class="hyundai-description-copy" data-i18n="hyundai.desc2">현대건설이 진행하는 단체활동을 일기 형식의 디자인으로 취재했습니다.</p></article>
+      <article class="hyundai-description hyundai-description--three"><h3>DESCRIPTION</h3><p class="hyundai-description-copy" data-i18n="hyundai.desc3">대학생 멘토가 활동 중반이 지난 시점에 모여<br>자신의 활동, 성과를 공유하는 시간을 가졌습니다.<br>한명의 멘토와 인터뷰를 진행해 활동의 취지를<br>전달하는 릴스를 제작했습니다.</p></article>
     </section>
   </main>
   <div class="hyundai-card-detail" data-hyundai-card-detail hidden>
