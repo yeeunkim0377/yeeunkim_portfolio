@@ -38,9 +38,10 @@ test('switcher styling inherits navigation typography and marks the active segme
   assert.match(css, /button\[aria-pressed="true"\]\{[^}]*background:#000/);
 });
 
-test('the language core observes project content rendered after initial load', () => {
-  assert.match(read('i18n-core.js'), /new browser\.MutationObserver/);
-  assert.match(read('i18n-core.js'), /childList: true, subtree: true/);
+test('the language core avoids a global mutation observer and refreshes after interaction', () => {
+  const core = read('i18n-core.js');
+  assert.doesNotMatch(core, /new browser\.MutationObserver/);
+  assert.match(core, /addEventListener\('click',[\s\S]*queueMicrotask/);
 });
 
 test('translation application does not rewrite unchanged HTML and retrigger its observer', () => {

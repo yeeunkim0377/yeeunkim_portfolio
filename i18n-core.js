@@ -128,10 +128,10 @@
       button.addEventListener('click', () => setLanguage(button.dataset.language));
     });
     setLanguage(language, { updateUrl: new URLSearchParams(browser.location.search).has('lang') });
-    if (browser.MutationObserver) {
-      const observer = new browser.MutationObserver(() => apply(browser.document));
-      observer.observe(browser.document.body, { childList: true, subtree: true });
-    }
+    browser.document.addEventListener('click', (event) => {
+      if (event.target.closest('[data-language]')) return;
+      browser.queueMicrotask(() => apply(browser.document));
+    });
     return language;
   }
 
