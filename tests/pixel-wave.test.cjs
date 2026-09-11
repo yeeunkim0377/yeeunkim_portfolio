@@ -1,7 +1,12 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 
-const { createAutoImpactScheduler } = require('../pixel-wave.js');
+const { createAutoImpactScheduler, startingFadeOpacity } = require('../pixel-wave.js');
+
+test('an immediate automatic fade begins from a visible impact', () => {
+  assert.equal(startingFadeOpacity(0, 0, true), 0.98);
+  assert.equal(startingFadeOpacity(0.4, 0, false), 0.4);
+});
 
 test('automatic impacts repeat at varied half-second intervals until stopped', () => {
   const scheduled = [];

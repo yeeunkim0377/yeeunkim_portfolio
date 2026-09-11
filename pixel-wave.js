@@ -75,6 +75,12 @@
     return Math.round(Math.pow(clamp(1 - distance / 6, 0, 1), 1.58) * 10) / 10;
   }
 
+  function startingFadeOpacity(currentOpacity, pathDistance, immediate = false) {
+    return immediate
+      ? Math.max(currentOpacity, intensity(pathDistance) * .98)
+      : currentOpacity;
+  }
+
   function fadeFactor(elapsed, duration = 1000) {
     const progress = clamp(elapsed / duration, 0, 1);
     return 1 - smoothstep(progress);
@@ -146,7 +152,7 @@
       impact: ({ x, y }) => {
         const now = view.performance.now();
         beginImpact({ column: x * (columns - 1), row: y * (rows - 1) }, now);
-        startFade(now);
+        startFade(now, true);
       },
     });
 
@@ -275,9 +281,12 @@
       rippleStarted = now;
     }
 
-    function startFade(now) {
+    function startFade(now, immediate = false) {
       if (Number.isFinite(fadeStarted)) return;
-      for (const tile of activeTiles) tile.fadeOpacity = tile.opacity;
+      for (const tile of activeTiles) {
+        tile.fadeOpacity = startingFadeOpacity(tile.opacity, tile.pathDistance, immediate);
+        tile.opacity = tile.fadeOpacity;
+      }
       fadeStarted = now;
     }
 
@@ -449,6 +458,7 @@
     activeTileCoordinates,
     distanceToTrail,
     intensity,
+    startingFadeOpacity,
     fadeFactor,
     createAutoImpactScheduler,
     initHeroPixelWave,
