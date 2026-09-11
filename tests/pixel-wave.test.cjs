@@ -1,14 +1,18 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 
-const { createAutoImpactScheduler, startingFadeOpacity } = require('../pixel-wave.js');
+const {
+  autoImpactOpacity,
+  createAutoImpactScheduler,
+} = require('../pixel-wave.js');
 
-test('an immediate automatic fade begins from a visible impact', () => {
-  assert.equal(startingFadeOpacity(0, 0, true), 0.98);
-  assert.equal(startingFadeOpacity(0.4, 0, false), 0.4);
+test('automatic impacts remain visible long enough to overlap the next pulse', () => {
+  assert.ok(autoImpactOpacity(0, 0) > 0.9);
+  assert.ok(autoImpactOpacity(3100, 0) > 0);
+  assert.equal(autoImpactOpacity(3600, 0), 0);
 });
 
-test('automatic impacts repeat at varied half-second intervals until stopped', () => {
+test('automatic impacts repeat every three seconds until stopped', () => {
   const scheduled = [];
   const cancelled = [];
   const impacts = [];
@@ -24,10 +28,10 @@ test('automatic impacts repeat at varied half-second intervals until stopped', (
   });
 
   scheduler.start();
-  assert.equal(scheduled[0].delay, 500);
+  assert.equal(scheduled[0].delay, 3000);
   scheduled[0].callback();
-  assert.deepEqual(impacts[0], { x: 0.75, y: 0.5 });
-  assert.equal(scheduled[1].delay, 440);
+  assert.deepEqual(impacts[0], { x: 0.25, y: 0.75 });
+  assert.equal(scheduled[1].delay, 3000);
 
   scheduler.stop();
   assert.deepEqual(cancelled, [2]);

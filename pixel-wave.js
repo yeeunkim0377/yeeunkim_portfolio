@@ -75,15 +75,13 @@
     return Math.round(Math.pow(clamp(1 - distance / 6, 0, 1), 1.58) * 10) / 10;
   }
 
-  function startingFadeOpacity(currentOpacity, pathDistance, immediate = false) {
-    return immediate
-      ? Math.max(currentOpacity, intensity(pathDistance) * .98)
-      : currentOpacity;
-  }
-
   function fadeFactor(elapsed, duration = 1000) {
     const progress = clamp(elapsed / duration, 0, 1);
     return 1 - smoothstep(progress);
+  }
+
+  function autoImpactOpacity(elapsed, distance, duration = 3600) {
+    return intensity(distance) * .98 * fadeFactor(elapsed, duration);
   }
 
   function createAutoImpactScheduler({ random, schedule, cancel, impact }) {
@@ -91,7 +89,7 @@
     let timer = null;
 
     function queueNext() {
-      const delay = 400 + random() * 400;
+      const delay = 3000;
       timer = schedule(() => {
         if (!active) return;
         impact({ x: random(), y: random() });
@@ -119,6 +117,7 @@
     const TARGET_TILE_SIZE = 20;
     const ACTIVE_RADIUS = 8;
     const FADE_MS = 1000;
+    const AUTO_FADE_MS = 3600;
     const field = documentRoot.querySelector('#hero-pixel-wave');
     if (!field || field.dataset.pixelWaveReady === 'true') return;
 
@@ -150,9 +149,10 @@
       schedule: (callback, delay) => view.setTimeout(callback, delay),
       cancel: (timer) => view.clearTimeout(timer),
       impact: ({ x, y }) => {
-        const now = view.performance.now();
-        beginImpact({ column: x * (columns - 1), row: y * (rows - 1) }, now);
-        startFade(now, true);
+        activateAutoImpact(
+          { column: x * (columns - 1), row: y * (rows - 1) },
+          view.performance.now(),
+        );
       },
     });
 
@@ -195,6 +195,7 @@
             jitter: (b - .5) * 7,
             damping: 88 + b * 18,
             variation: a,
+            autoImpacts: [],
           });
         }
       }
@@ -208,14 +209,18 @@
       tile.y = 0;
       tile.scale = 1;
       tile.rotation = 0;
-      tile.element.style.setProperty('--red-opacity', '0');
-      tile.element.style.removeProperty('--motion-transform');
-      tile.element.style.removeProperty('--motion-alpha');
+      if (!tile.autoImpacts.length) {
+        tile.element.style.setProperty('--red-opacity', '0');
+        tile.element.style.removeProperty('--motion-transform');
+        tile.element.style.removeProperty('--motion-alpha');
+      }
     }
 
     function clearActiveTiles() {
       for (const tile of activeTiles) resetTile(tile);
-      activeTiles.clear();
+      for (const tile of [...activeTiles]) {
+        if (!tile.autoImpacts.length) activeTiles.delete(tile);
+      }
     }
 
     function activateAround(point) {
@@ -230,6 +235,23 @@
           tile.pathDistance,
           Math.hypot(column - point.column, row - point.row),
         );
+        activeTiles.add(tile);
+      }
+    }
+
+    function activateAutoImpact(point, now) {
+      for (const { column, row } of activeTileCoordinates(
+        columns,
+        rows,
+        point,
+        ACTIVE_RADIUS,
+      )) {
+        const tile = tiles[row * columns + column];
+        tile.autoImpacts.push({
+          center: point,
+          distance: Math.hypot(column - point.column, row - point.row),
+          started: now,
+        });
         activeTiles.add(tile);
       }
     }
@@ -281,18 +303,14 @@
       rippleStarted = now;
     }
 
-    function startFade(now, immediate = false) {
+    function startFade(now) {
       if (Number.isFinite(fadeStarted)) return;
-      for (const tile of activeTiles) {
-        tile.fadeOpacity = startingFadeOpacity(tile.opacity, tile.pathDistance, immediate);
-        tile.opacity = tile.fadeOpacity;
-      }
+      for (const tile of activeTiles) tile.fadeOpacity = tile.opacity;
       fadeStarted = now;
     }
 
     field.addEventListener('pointerdown', (event) => {
       if (pointerDown) return;
-      autoImpact.stop();
       event.preventDefault();
       pointerDown = true;
       dragging = false;
@@ -369,15 +387,26 @@
       }
 
       for (const tile of activeTiles) {
-        const target = fading ? tile.fadeOpacity * fade : intensity(tile.pathDistance) * .98;
+        tile.autoImpacts = tile.autoImpacts.filter(({ started }) => now - started < AUTO_FADE_MS);
+        const autoOpacity = tile.autoImpacts.reduce((strongest, effect) => Math.max(
+          strongest,
+          autoImpactOpacity(now - effect.started, effect.distance, AUTO_FADE_MS),
+        ), 0);
+        const manualOpacity = fading ? tile.fadeOpacity * fade : intensity(tile.pathDistance) * .98;
+        const target = Math.max(manualOpacity, autoOpacity);
         const smoothing = reducedMotion.matches ? 1 : target < tile.opacity ? .8 : dragging ? .66 : .5;
         tile.opacity += (target - tile.opacity) * smoothing;
         tile.element.style.setProperty('--red-opacity', tile.opacity.toFixed(3));
 
-        const dx = tile.column - rippleCenter.column;
-        const dy = tile.row - rippleCenter.row;
+        const latestAutoImpact = tile.autoImpacts.at(-1);
+        const useAutoMotion = latestAutoImpact
+          && (!Number.isFinite(tile.pathDistance) || latestAutoImpact.started > rippleStarted);
+        const motionCenter = useAutoMotion ? latestAutoImpact.center : rippleCenter;
+        const motionStarted = useAutoMotion ? latestAutoImpact.started : rippleStarted;
+        const dx = tile.column - motionCenter.column;
+        const dy = tile.row - motionCenter.row;
         const distance = Math.hypot(dx, dy);
-        const local = now - rippleStarted - (distance < .5 ? 0 : distance * 18 + tile.jitter);
+        const local = now - motionStarted - (distance < .5 ? 0 : distance * 18 + tile.jitter);
         const influence = Math.exp(-distance / 2.05);
         const directionX = distance > .001 ? dx / distance : 0;
         const directionY = distance > .001 ? dy / distance : 0;
@@ -423,6 +452,10 @@
           tile.element.style.removeProperty('--motion-transform');
           tile.element.style.removeProperty('--motion-alpha');
         }
+
+        if (!trail.length && !tile.autoImpacts.length && tile.opacity < .002) {
+          activeTiles.delete(tile);
+        }
       }
 
       view.requestAnimationFrame(animate);
@@ -458,8 +491,8 @@
     activeTileCoordinates,
     distanceToTrail,
     intensity,
-    startingFadeOpacity,
     fadeFactor,
+    autoImpactOpacity,
     createAutoImpactScheduler,
     initHeroPixelWave,
   };
