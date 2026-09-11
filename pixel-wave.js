@@ -80,6 +80,34 @@
     return 1 - smoothstep(progress);
   }
 
+  function createAutoImpactScheduler({ random, schedule, cancel, impact }) {
+    let active = false;
+    let timer = null;
+
+    function queueNext() {
+      const delay = 400 + random() * 400;
+      timer = schedule(() => {
+        if (!active) return;
+        impact({ x: random(), y: random() });
+        queueNext();
+      }, delay);
+    }
+
+    return {
+      start() {
+        if (active) return;
+        active = true;
+        queueNext();
+      },
+      stop() {
+        if (!active) return;
+        active = false;
+        cancel(timer);
+        timer = null;
+      },
+    };
+  }
+
   function initHeroPixelWave(documentRoot) {
     const BASE = 16;
     const TARGET_TILE_SIZE = 20;
@@ -111,6 +139,16 @@
     let suppressClick = false;
     let suppressTimer;
     let resizeTimer;
+    const autoImpact = createAutoImpactScheduler({
+      random: Math.random,
+      schedule: (callback, delay) => view.setTimeout(callback, delay),
+      cancel: (timer) => view.clearTimeout(timer),
+      impact: ({ x, y }) => {
+        const now = view.performance.now();
+        beginImpact({ column: x * (columns - 1), row: y * (rows - 1) }, now);
+        startFade(now);
+      },
+    });
 
     const keyOf = (column, row) => `${column}:${row}`;
 
@@ -245,6 +283,7 @@
 
     field.addEventListener('pointerdown', (event) => {
       if (pointerDown) return;
+      autoImpact.stop();
       event.preventDefault();
       pointerDown = true;
       dragging = false;
@@ -389,6 +428,7 @@
     }
 
     buildGrid();
+    if (!reducedMotion.matches) autoImpact.start();
     if ('ResizeObserver' in view) {
       const resizeObserver = new view.ResizeObserver(() => {
         view.clearTimeout(resizeTimer);
@@ -410,6 +450,7 @@
     distanceToTrail,
     intensity,
     fadeFactor,
+    createAutoImpactScheduler,
     initHeroPixelWave,
   };
 });
