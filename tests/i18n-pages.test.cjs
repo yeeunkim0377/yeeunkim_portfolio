@@ -42,3 +42,8 @@ test('the language core observes project content rendered after initial load', (
   assert.match(read('i18n-core.js'), /new browser\.MutationObserver/);
   assert.match(read('i18n-core.js'), /childList: true, subtree: true/);
 });
+
+test('translation application does not rewrite unchanged HTML and retrigger its observer', () => {
+  const core = read('i18n-core.js');
+  assert.match(core, /if \(node\.innerHTML !== translated\) node\.innerHTML = translated/);
+});

@@ -67,7 +67,8 @@
         const fallback = node.getAttribute(attribute) || '';
         node.setAttribute(attribute, t(key, fallback));
       } else {
-        node.innerHTML = t(key, node.innerHTML);
+        const translated = t(key, node.innerHTML);
+        if (node.innerHTML !== translated) node.innerHTML = translated;
       }
     });
     document.querySelectorAll('[data-language]').forEach((button) => {
