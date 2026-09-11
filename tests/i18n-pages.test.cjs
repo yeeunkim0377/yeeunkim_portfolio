@@ -44,6 +44,24 @@ test('the language core avoids a global mutation observer and refreshes after in
   assert.match(core, /addEventListener\('click',[\s\S]*queueMicrotask/);
 });
 
+test('mobile home tagline uses a smaller size for the intended line break', () => {
+  const css = read('styles.css');
+  assert.match(css, /@media\(max-width:520px\)\{\.hero h1\{font-size:30px\}\}/);
+});
+
+test('mobile home preview reel does not auto-scroll', () => {
+  const js = read('script.js');
+  assert.match(js, /matchMedia\('\(max-width: 520px\)'\)/);
+  assert.match(js, /!reducedMotion\.matches && !mobileViewport\.matches/);
+  assert.match(js, /if \(!mobileViewport\.matches\) requestAnimationFrame\(advance\)/);
+});
+
+test('mobile work heading stays above a spaced black project list', () => {
+  const css = read('styles.css');
+  assert.match(css, /@media\(max-width:520px\)\{\.projects h2\{position:static;margin:0 0 48px\}/);
+  assert.match(css, /\.projects \.project,\.projects \.project strong,\.projects \.project span\{color:var\(--ink\)\}/);
+});
+
 test('translation application does not rewrite unchanged HTML and retrigger its observer', () => {
   const core = read('i18n-core.js');
   assert.match(core, /if \(node\.innerHTML !== translated\) node\.innerHTML = translated/);

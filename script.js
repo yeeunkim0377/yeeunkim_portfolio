@@ -33,6 +33,7 @@ projects.forEach((button) => {
   if (!reel || !track || !core) return;
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const mobileViewport = window.matchMedia('(max-width: 520px)');
   const dataCenterImages = [
     { file: '07b224d1a42de03d5813255aaad61ddeef3c223a.png' },
     { file: '1fa4582d43b7ce79a1bdb6368ddfd9f975e32b30.png' },
@@ -123,7 +124,7 @@ projects.forEach((button) => {
     reel.classList.remove('is-data-center', 'is-hyundai', 'is-pleats');
     for (let index = 0; index < 4; index += 1) track.appendChild(createPulioImage());
     void track.offsetHeight;
-    if (!reducedMotion.matches) requestAnimationFrame(advance);
+    if (!reducedMotion.matches && !mobileViewport.matches) requestAnimationFrame(advance);
   };
 
   const fillDataCenter = () => {
@@ -134,7 +135,7 @@ projects.forEach((button) => {
     reel.classList.remove('is-hyundai', 'is-pleats');
     reel.classList.add('is-data-center');
     void track.offsetHeight;
-    if (!reducedMotion.matches) requestAnimationFrame(advance);
+    if (!reducedMotion.matches && !mobileViewport.matches) requestAnimationFrame(advance);
   };
 
   const fillHyundai = () => {
@@ -145,7 +146,7 @@ projects.forEach((button) => {
     reel.classList.remove('is-data-center', 'is-pleats');
     reel.classList.add('is-hyundai');
     void track.offsetHeight;
-    if (!reducedMotion.matches) requestAnimationFrame(advance);
+    if (!reducedMotion.matches && !mobileViewport.matches) requestAnimationFrame(advance);
   };
 
   const fillPleats = () => {
@@ -156,7 +157,7 @@ projects.forEach((button) => {
     reel.classList.remove('is-data-center', 'is-hyundai');
     reel.classList.add('is-pleats');
     void track.offsetHeight;
-    if (!reducedMotion.matches) requestAnimationFrame(advance);
+    if (!reducedMotion.matches && !mobileViewport.matches) requestAnimationFrame(advance);
   };
 
   const advance = () => {
@@ -179,7 +180,7 @@ projects.forEach((button) => {
       track.appendChild(createPulioImage());
     }
     void track.offsetHeight;
-    requestAnimationFrame(advance);
+    if (!mobileViewport.matches) requestAnimationFrame(advance);
   });
 
   document.querySelectorAll('[data-project="DATA CENTER"]').forEach((project) => {
