@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="836.475" height="341.745" viewBox="0 0 836.475 341.745" role="img" aria-label="Workflow before automation">
+  <image href="workflow-before.svg" width="836.475" height="341.745"/>
+  <g fill="#fffaf9">
+    <rect x="0" y="140" width="145" height="35"/><rect x="255" y="140" width="165" height="35"/><rect x="532" y="184" width="230" height="36"/>
+    <rect x="407" y="176" width="84" height="43"/><rect x="744" y="176" width="90" height="43"/>
+  </g>
+  <g font-family="Raleway, Arial, sans-serif" font-weight="400" fill="#000" font-size="20">
+    <text x="0" y="164">Brief Handoff</text><text x="261" y="164">Artboard Creation</text><text x="539" y="209">Component Placement</text>
+  </g>
+  <g font-family="Raleway, Arial, sans-serif" font-weight="400" fill="#ee0000" font-size="14" text-anchor="middle">
+    <text x="449" y="192">Reference</text><text x="449" y="210">Search</text><text x="789" y="192">Reference</text><text x="789" y="210">Search</text>
+  </g>
+</svg>
