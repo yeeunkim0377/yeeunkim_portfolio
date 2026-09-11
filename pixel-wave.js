@@ -89,7 +89,7 @@
     let timer = null;
 
     function queueNext() {
-      const delay = 3000;
+      const delay = 2000;
       timer = schedule(() => {
         if (!active) return;
         impact({ x: random(), y: random() });

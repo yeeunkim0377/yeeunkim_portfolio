@@ -12,7 +12,7 @@ test('automatic impacts remain visible long enough to overlap the next pulse', (
   assert.equal(autoImpactOpacity(3600, 0), 0);
 });
 
-test('automatic impacts repeat every three seconds until stopped', () => {
+test('automatic impacts repeat every two seconds until stopped', () => {
   const scheduled = [];
   const cancelled = [];
   const impacts = [];
@@ -28,10 +28,10 @@ test('automatic impacts repeat every three seconds until stopped', () => {
   });
 
   scheduler.start();
-  assert.equal(scheduled[0].delay, 3000);
+  assert.equal(scheduled[0].delay, 2000);
   scheduled[0].callback();
   assert.deepEqual(impacts[0], { x: 0.25, y: 0.75 });
-  assert.equal(scheduled[1].delay, 3000);
+  assert.equal(scheduled[1].delay, 2000);
 
   scheduler.stop();
   assert.deepEqual(cancelled, [2]);
