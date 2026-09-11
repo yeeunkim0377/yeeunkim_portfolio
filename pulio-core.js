@@ -37,5 +37,25 @@
     });
   }
 
-  return { createGalleryModel, activateVideo, bindClickToPlay };
+  const workflowEnglish = new Map([
+    ['기획안 전달', 'Brief Handoff'],
+    ['아트보드 생성', 'Artboard Creation'],
+    ['구성 요소 배치', 'Component Placement'],
+    ['레퍼런스', 'Reference'],
+    ['탐색', 'Search'],
+    ['디자인', 'Design'],
+    ['AI - 구성 요소 배치', 'AI-Assisted Component Placement'],
+  ]);
+  const workflowKorean = new Map([...workflowEnglish].map(([ko, en]) => [en, ko]));
+
+  function translateWorkflowDocument(svgDocument, language) {
+    if (!svgDocument) return;
+    const translations = language === 'en' ? workflowEnglish : workflowKorean;
+    svgDocument.querySelectorAll('tspan').forEach((node) => {
+      const source = node.textContent.trim();
+      if (translations.has(source)) node.textContent = translations.get(source);
+    });
+  }
+
+  return { createGalleryModel, activateVideo, bindClickToPlay, translateWorkflowDocument };
 }));

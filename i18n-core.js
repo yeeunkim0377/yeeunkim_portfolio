@@ -34,6 +34,7 @@
   function register(dictionary) {
     ['ko', 'en'].forEach((lang) => Object.assign(messages[lang], dictionary[lang] || {}));
     literalKeys = new Map(Object.entries(messages.ko).map(([key, value]) => [normalize(value), key]));
+    if (browser && initialized) apply(browser.document);
   }
 
   function normalize(value) {
@@ -128,6 +129,8 @@
       button.addEventListener('click', () => setLanguage(button.dataset.language));
     });
     setLanguage(language, { updateUrl: new URLSearchParams(browser.location.search).has('lang') });
+    if (browser.document.readyState === 'complete') apply(browser.document);
+    else browser.addEventListener('load', () => apply(browser.document), { once: true });
     browser.document.addEventListener('click', (event) => {
       if (event.target.closest('[data-language]')) return;
       browser.queueMicrotask(() => apply(browser.document));

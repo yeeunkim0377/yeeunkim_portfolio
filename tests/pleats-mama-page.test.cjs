@@ -187,6 +187,48 @@ test('Pleats labels Store Spatial Design with the shared project bullet', () => 
   assert.match(css, /\[data-figma-id="24:21"\]::before\{[^}]*content:"▪";/);
 });
 
+test('site location badge expands to fit Korean and English copy', () => {
+  const js = read('pleats-mama.js');
+  const css = read('pleats-mama.css');
+  assert.match(js, /layer\.id === '24:24'[^\n]*pleats-site-badge/);
+  assert.match(js, /layer\.id === '24:25'[^\n]*pleats-site-badge__text/);
+  assert.match(css, /\.pleats-site-badge\{[^}]*width:max-content[^}]*height:auto[^}]*padding:11px[^}]*box-sizing:border-box/);
+  assert.match(css, /\.pleats-site-badge__text\{[^}]*position:static[^}]*width:max-content[^}]*height:auto[^}]*transform:none[^}]*white-space:nowrap/);
+});
+
+test('Concept Design copy stays centered with a dynamic twenty-pixel gap', () => {
+  const js = read('pleats-mama.js');
+  const css = read('pleats-mama.css');
+
+  assert.match(js, /layer\.id === '24:531'[^\n]*pleats-concept-copy-title/);
+  assert.match(js, /layer\.id === '24:532'[^\n]*pleats-concept-copy-body/);
+  assert.match(js, /conceptCopyTitle\.offsetHeight \+ 20/);
+  assert.match(js, /portfolio:languagechange[^\n]*syncConceptCopyLayout/);
+  assert.match(css, /\.pleats-concept-copy-title,.pleats-concept-copy-body\{[^}]*width:655px!important[^}]*height:auto!important[^}]*text-align:center/);
+});
+
+test('Record Space is translated and Guide Space small copy hides only in English', () => {
+  const data = read('pleats-mama-data.js');
+  const js = read('pleats-mama.js');
+  const css = read('pleats-mama.css');
+  const translations = read('i18n-translations.js');
+
+  assert.match(data, /id: '24:119'[\s\S]*?text:/);
+  assert.match(js, /layer\.id === '24:119'[^\n]*dataset\.i18n = 'pleats\.record'/);
+  assert.match(js, /GUIDE_COPY_IDS = new Set\(\['24:41', '24:42'\]\)/);
+  assert.match(css, /html\[lang="en"\] \.pleats-guide-small-copy\{display:none\}/);
+  assert.match(translations, /'pleats\.record': 'A space for documenting time spent at PLEATS MAMA/);
+});
+
+test('Perspective descriptions switch to English for every slide', () => {
+  const data = loadPleatsData();
+  const js = read('pleats-mama.js');
+
+  assert.ok(data.perspectives.every((slide) => typeof slide.enDescription === 'string' && slide.enDescription.length > 0));
+  assert.match(js, /slide\.enDescription/);
+  assert.match(js, /window\.PortfolioI18n\?\.getLanguage\?\.\(\)/);
+});
+
 test('User Experience retains the original Figma L-shaped dotted customer route', () => {
   const data = loadPleatsData();
   const route = findLayer(data.layers, '24:38');

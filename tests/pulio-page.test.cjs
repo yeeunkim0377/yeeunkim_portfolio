@@ -31,12 +31,21 @@ test('Pulio contribution matches the Data Center typography and spacing', () => 
   assert.match(css, /\.pulio-categories\{[^}]*top:123\.033px;/);
 });
 
-test('Pulio keeps the original workflow images and overlays translated labels in English', () => {
-  assert.match(html, /src="assets\/pulio\/workflow\/workflow-before\.svg" alt=/);
-  assert.match(html, /src="assets\/pulio\/workflow\/workflow-after\.svg" alt=/);
+test('Pulio keeps the original workflow artwork and translates only its text nodes', () => {
+  assert.match(html, /data="assets\/pulio\/workflow\/workflow-before\.svg"[^>]*data-workflow/);
+  assert.match(html, /data="assets\/pulio\/workflow\/workflow-after\.svg"[^>]*data-workflow/);
   assert.doesNotMatch(html, /workflow-(?:before|after)-en\.svg/);
-  assert.match(html, /class="pulio-workflow-translation pulio-workflow-translation-before"/);
-  assert.match(html, /Brief Handoff/);
-  assert.match(html, /AI-Assisted Component Placement/);
-  assert.match(css, /:lang\(en\) \.pulio-workflow-translation\{display:block/);
+  assert.doesNotMatch(html, /pulio-workflow-translation/);
+});
+
+test('workflow translation changes copy without touching SVG typography attributes', () => {
+  const { translateWorkflowDocument } = require('../pulio-core.js');
+  const node = { textContent: '기획안 전달', attributes: { 'font-family': 'Gothic A1', 'font-weight': '500' } };
+  const svg = { querySelectorAll: () => [node] };
+
+  translateWorkflowDocument(svg, 'en');
+  assert.equal(node.textContent, 'Brief Handoff');
+  assert.deepEqual(node.attributes, { 'font-family': 'Gothic A1', 'font-weight': '500' });
+  translateWorkflowDocument(svg, 'ko');
+  assert.equal(node.textContent, '기획안 전달');
 });

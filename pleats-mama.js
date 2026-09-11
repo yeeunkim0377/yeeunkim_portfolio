@@ -7,6 +7,7 @@
 
   const matrix = ({ m00 = 1, m01 = 0, m02 = 0, m10 = 0, m11 = 1, m12 = 0 } = {}) =>
     `matrix(${m00},${m10},${m01},${m11},${m02},${m12})`;
+  const GUIDE_COPY_IDS = new Set(['24:41', '24:42']);
 
   function applyGeometry(element, layer, presentation) {
     element.style.width = `${layer.size.x}px`;
@@ -126,6 +127,12 @@
       element.className = `pleats-layer${layer.type === 'ELLIPSE' ? ' pleats-layer--ellipse' : ''}`;
     }
     element.dataset.figmaId = layer.id;
+    if (layer.id === '24:119') element.dataset.i18n = 'pleats.record';
+    if (GUIDE_COPY_IDS.has(layer.id)) element.classList.add('pleats-guide-small-copy');
+    if (layer.id === '24:24') element.classList.add('pleats-site-badge');
+    if (layer.id === '24:25') element.classList.add('pleats-site-badge__text');
+    if (layer.id === '24:531') element.classList.add('pleats-concept-copy-title');
+    if (layer.id === '24:532') element.classList.add('pleats-concept-copy-body');
     if (layer.id === '24:37') element.classList.add('pleats-ux-scene');
     const presentation = core.uxPresentation(layer.id);
     if (presentation) {
@@ -150,6 +157,17 @@
     if (element) fragment.appendChild(element);
   }
   host.appendChild(fragment);
+
+  const conceptCopyTitle = host.querySelector('.pleats-concept-copy-title');
+  const conceptCopyBody = host.querySelector('.pleats-concept-copy-body');
+  function syncConceptCopyLayout() {
+    if (!conceptCopyTitle || !conceptCopyBody) return;
+    const titleTop = 1476.6453857421875;
+    conceptCopyBody.style.transform = matrix({ m02: 706.23046875, m12: titleTop + conceptCopyTitle.offsetHeight + 20 });
+  }
+  syncConceptCopyLayout();
+  window.addEventListener('load', syncConceptCopyLayout);
+  document.addEventListener('portfolio:languagechange', syncConceptCopyLayout);
 
   const perspectiveViewport = document.querySelector('[data-pleats-perspective]');
   const perspectiveNext = document.querySelector('[data-pleats-next]');
@@ -247,7 +265,10 @@
       }
     }
     if (floorLabel) floorLabel.textContent = slide.floorLabel;
-    if (description) description.textContent = slide.description;
+    if (description) {
+      const language = window.PortfolioI18n?.getLanguage?.() || 'ko';
+      description.textContent = language === 'en' && slide.enDescription ? slide.enDescription : slide.description;
+    }
     if (planMarker) {
       planMarker.style.width = `${slide.marker.size.x}px`;
       planMarker.style.height = `${slide.marker.size.y}px`;
@@ -256,6 +277,9 @@
     }
     refreshMagnifierContent();
   }
+  document.addEventListener('portfolio:languagechange', () => {
+    if (perspectiveSlides[perspectiveIndex]) updatePerspectiveDetails(perspectiveSlides[perspectiveIndex]);
+  });
 
   async function showNextPerspective() {
     hideMagnifier();

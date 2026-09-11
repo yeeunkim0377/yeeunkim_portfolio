@@ -1,5 +1,9 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+
+const workspace = path.resolve(__dirname, '..');
 
 const core = require('../data-center-core.js');
 require('../data-center-detail-data.js');
@@ -60,7 +64,7 @@ test('3-4F Green Terrace uses the supplied Figma export at fixed geometry with 1
 test('3-4F Smart Farm photo and its lower caption retain their prior positions', () => {
   const floor = detailFrames.find((frame) => frame.id === 'floor-3');
   const photo = floor.items.find((item) => item.alt === '1009 스팜 렌더 최종 1');
-  const labels = floor.items.filter((item) => item.type === 'text' && ['01', 'Green Terrace', '복층의 수직 정원으로, 산책로에 자신의 식물을 확인할\n수 있는 키오스크가 배치되어 있습니다.'].includes(item.text));
+  const labels = floor.items.filter((item) => item.type === 'text' && ['01', 'Green Terrace', '복층의 수직 정원으로, 산책로에 자신의 식물을\n확인할 수 있는 키오스크가 배치되어 있습니다.'].includes(item.text));
 
   nearlyEqual(photo.x, 64.4697265625);
   assert.deepEqual(labels.map((item) => item.x), [45.92169189453125, 66.27667236328125, 63.92169189453125]);
@@ -72,6 +76,24 @@ test('3-4F right Smart Farm render and its lower copy move right together by 150
     || ['02', 'Smart Farm', '토마토, 상추, 파프리카 등 다양한 식물을 재배할 수 있습니다.\n시민들은 스마트팜에서 자신의 식물을 재배합니다.'].includes(item.text)));
 
   assert.deepEqual(group.map((item) => item.x), [1149.109375, 1170.9365234375, 1167.04296875, 1149.109375]);
+});
+
+test('3-4F Korean 01 and 02 descriptions use the approved two-line breaks', () => {
+  const floor = detailFrames.find((frame) => frame.id === 'floor-3');
+  const terrace = floor.items.find((item) => item.text?.startsWith('복층의 수직 정원으로'));
+  const smartFarm = floor.items.find((item) => item.text?.startsWith('토마토, 상추'));
+  const translations = fs.readFileSync(path.join(workspace, 'i18n-translations.js'), 'utf8');
+
+  assert.equal(terrace.text.split('\n').length, 2);
+  assert.match(terrace.text, /자신의 식물을\n확인할 수/);
+  assert.equal(smartFarm.text.split('\n').length, 2);
+  assert.match(smartFarm.text, /재배할 수 있습니다\.\n시민들은/);
+  assert.match(translations, /'dc\.farm': '[^']*재배할 수 있습니다\.\\n시민들은/);
+  assert.match(translations, /'dc\.garden': '[^']*자신의 식물을\\n확인할 수/);
+  assert.equal(core.detailLocalizedValue(smartFarm, 'whiteSpace', 'ko'), 'pre');
+  assert.equal(core.detailLocalizedValue(terrace, 'whiteSpace', 'ko'), 'pre');
+  assert.equal(core.detailLocalizedValue(smartFarm, 'whiteSpace', 'en'), 'pre-wrap');
+  assert.equal(core.detailLocalizedValue(terrace, 'whiteSpace', 'en'), 'pre-wrap');
 });
 
 test('3-4F left axonometric piece uses the supplied fixed image without geometry changes', () => {
@@ -96,6 +118,82 @@ test('floor detail pages omit centered current-floor labels', () => {
   assert.equal(detailFrames.flatMap((frame) => frame.items).filter((item) => item.type === 'text' && labels.has(item.text)).length, 0);
 });
 
+test('8-9F English UI caption breaks after View real-time drone', () => {
+  const translations = fs.readFileSync(path.join(workspace, 'i18n-translations.js'), 'utf8');
+  assert.match(translations, /'dc\.live': 'View real-time drone\\ninformation'/);
+});
+
+test('8-9F Korean 01 image description has no forced break after 기술에', () => {
+  const floor = detailFrames.find((frame) => frame.items.some((item) => item.text === 'Drone playground'));
+  const description = floor.items.find((item) => item.text?.startsWith('드론이 생소한 시민들이'));
+
+  assert.doesNotMatch(description.text, /기술에\n/);
+  assert.match(description.text, /기술에 대한/);
+});
+
+test('6-7F System title box hugs its label and English copy breaks after stable', () => {
+  const floor = detailFrames.find((frame) => frame.id === 'floor-6');
+  const title = floor.items.find((item) => item.type === 'text' && item.text === 'System');
+  const background = floor.items.find((item) => item.type === 'zone-background');
+  const translations = fs.readFileSync(path.join(workspace, 'i18n-translations.js'), 'utf8');
+
+  assert.equal(title.w, 273);
+  assert.equal(background.w, 283.3037109375);
+  assert.equal(title.enW, 102);
+  assert.equal(background.enW, 110);
+  assert.match(translations, /'dc\.systems': 'UPS[^']*stable\\noperation\.[^']*accessible\.'/);
+});
+
+test('6-7F Korean 01 image description first breaks after 수직적으로', () => {
+  const floor = detailFrames.find((frame) => frame.items.some((item) => item.text === 'Server Trail'));
+  const description = floor.items.find((item) => item.text?.startsWith('신관이 3-9F는'));
+
+  assert.match(description.text, /서버실을 수직적으로\n이동할 수 있는 산책로/);
+  assert.doesNotMatch(description.text, /이동할 수 있는\n산책로/);
+});
+
+test('5F English forum copy breaks after and and its meeting caption moves above the UI', () => {
+  const floor = detailFrames.find((frame) => frame.id === 'floor-5');
+  const meetingCaption = floor.items.find((item) => item.text?.startsWith('02 미팅룸'));
+  const translations = fs.readFileSync(path.join(workspace, 'i18n-translations.js'), 'utf8');
+
+  assert.equal(meetingCaption.y, 673.434814453125);
+  assert.equal(meetingCaption.enY, 673.434814453125);
+  assert.match(translations, /'dc\.forum': '03 Data Forum[^']*and\\ngovernment representatives[^']*data\.'/);
+  assert.equal(core.detailLocalizedValue(meetingCaption, 'y', 'en'), 673.434814453125);
+  assert.equal(core.detailLocalizedValue(meetingCaption, 'y', 'ko'), 673.434814453125);
+});
+
+test('1F English window copy aligns to its image and the UI caption clears its dash line', () => {
+  const floor = detailFrames.find((frame) => frame.id === 'floor-12');
+  const windowCopy = floor.items.find((item) => item.text === '외부 창을 통해서 시민을 유입시키는 공간입니다');
+  const lowerImage = floor.items.find((item) => item.alt === '1층 쇼데월(프레임x) 2');
+  const uiCopy = floor.items.find((item) => item.text?.startsWith('오프라인 공간에서'));
+  const translations = fs.readFileSync(path.join(workspace, 'i18n-translations.js'), 'utf8');
+
+  assert.equal(windowCopy.x, 78.0573272705078);
+  assert.equal(windowCopy.nowrap, true);
+  assert.equal(windowCopy.enX, lowerImage.x);
+  assert.equal(windowCopy.enY, 850.4382934570312);
+  assert.equal(windowCopy.enW, lowerImage.w);
+  assert.equal(windowCopy.enWhiteSpace, 'pre-wrap');
+  assert.equal(uiCopy.y, 807.224609375);
+  assert.equal(uiCopy.enY, 807.224609375);
+  assert.match(translations, /'dc\.window': 'A space designed to draw passersby in\\nthrough its street-facing windows\.'/);
+});
+
+test('B1F English UI caption moves left and breaks after and make', () => {
+  const floor = detailFrames.find((frame) => frame.id === 'b1');
+  const uiCopy = floor.items.find((item) => item.text?.startsWith('01, 02 공간에 대한 정보'));
+  const translations = fs.readFileSync(path.join(workspace, 'i18n-translations.js'), 'utf8');
+
+  assert.equal(uiCopy.x, 891.04296875);
+  assert.equal(uiCopy.enX, 821.04296875);
+  assert.equal(core.detailLocalizedValue(uiCopy, 'x', 'en'), 821.04296875);
+  assert.equal(core.detailLocalizedValue(uiCopy, 'x', 'ko'), 891.04296875);
+  assert.match(translations, /'dc\.booking': 'Visitors can view information and make\\nreservations for spaces 01 and 02\.'/);
+});
+
 test('1F Water Space moves right by 170px without changing either image size', () => {
   const floor = detailFrames.find((frame) => frame.id === 'floor-12');
   const group = floor.items.filter((item) => ['image', 'text'].includes(item.type) && (['[최종] 수공간_탑뷰 3', '[최종] 수공간_정면 2'].includes(item.alt)
@@ -113,7 +211,7 @@ test('1F Shopping Data wall images and copy move left together by 40px', () => {
   const group = floor.items.filter((item) => ['image', 'text'].includes(item.type) && (['데이터라운지_쇼데월 3', '1층 쇼데월(프레임x) 2'].includes(item.alt)
     || ['03', 'Shopping Data wall', '외부 창을 통해서 시민을 유입시키는 공간입니다'].includes(item.text) || item.text?.startsWith('동성로의 쇼핑')));
 
-  assert.deepEqual(group.map((item) => item.x), [394.365234375, 96.31865936517625, 725.328125, 749.0166015625, 743.328125, 113.0573272705078]);
+  assert.deepEqual(group.map((item) => item.x), [394.365234375, 96.31865936517625, 725.328125, 749.0166015625, 743.328125, 78.0573272705078]);
   assert.equal(group.at(-1).nowrap, true, 'the exterior-window caption must remain on one line');
 });
 
@@ -287,12 +385,12 @@ test('floor details omit the UI DESIGN title above the UI screenshots', () => {
   }
 });
 
-test('UI screenshots and their captions sit thirty-three pixels below their Figma positions', () => {
+test('UI screenshots and their captions retain their approved vertical positions', () => {
   const expectedY = {
     b1: [540.0319213867188, 770.6031494140625],
-    'floor-12': [857.224609375, 540.03515625],
+    'floor-12': [807.224609375, 540.03515625],
     'floor-3': [540.03515625, 755.60546875],
-    'floor-5': [620.82421875, 715.4894409179688, 693.434814453125],
+    'floor-5': [620.82421875, 715.4894409179688, 673.434814453125],
     'floor-6': [540.03515625],
     'floor-8': [540.03515625],
   };

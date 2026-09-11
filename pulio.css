@@ -43,20 +43,6 @@
 .pulio-workflow-art{position:absolute;display:block}
 .pulio-workflow-art-before{left:302.102px;top:106.851px;width:836.475px;height:341.745px}
 .pulio-workflow-art-after{left:150.666px;top:1652.193px;width:647.57px;height:380.261px}
-.pulio-workflow-translation{position:absolute;z-index:2;display:none;pointer-events:none;font-family:'Raleway',sans-serif;font-size:20px;line-height:25px;font-weight:400}
-:lang(en) .pulio-workflow-translation{display:block}
-.pulio-workflow-translation span{position:absolute;box-sizing:border-box;background:var(--pulio-paper);white-space:nowrap}
-.pulio-workflow-translation-before{left:302.102px;top:106.851px;width:836.475px;height:341.745px}
-.pulio-workflow-translation-before span:nth-child(1){left:0;top:140px;width:145px;height:35px;padding-top:6px}
-.pulio-workflow-translation-before span:nth-child(2){left:255px;top:140px;width:170px;height:35px;padding:6px 0 0 6px}
-.pulio-workflow-translation-before span:nth-child(3){left:532px;top:184px;width:232px;height:36px;padding:6px 0 0 7px}
-.pulio-workflow-translation-before span:nth-child(4),.pulio-workflow-translation-before span:nth-child(5){top:176px;width:90px;height:43px;padding-top:1px;color:var(--pulio-red);font-size:14px;line-height:18px;text-align:center}
-.pulio-workflow-translation-before span:nth-child(4){left:405px}.pulio-workflow-translation-before span:nth-child(5){left:742px}
-.pulio-workflow-translation-after{left:150.666px;top:1652.193px;width:647.57px;height:380.261px}
-.pulio-workflow-translation-after span:nth-child(1){left:0;top:103px;width:160px;height:36px;padding-top:6px}
-.pulio-workflow-translation-after span:nth-child(2){left:298px;top:103px;width:180px;height:36px;padding:6px 0 0 6px}
-.pulio-workflow-translation-after span:nth-child(3){left:572px;top:103px;width:75px;height:36px;padding:6px 0 0 7px}
-.pulio-workflow-translation-after span:nth-child(4){left:270px;top:312px;width:370px;height:38px;padding:6px 0 0 6px}
 .pulio-workflow-folder{position:absolute;z-index:0;display:block;pointer-events:none}
 .pulio-workflow-folder-before{left:191.157px;top:655.481px;width:529.182px;height:382.554px}
 .pulio-workflow-folder-after{left:645.48px;top:1152.437px;width:590.272px;height:396.575px}

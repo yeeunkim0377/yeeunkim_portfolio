@@ -53,6 +53,7 @@
         },
         floorLabel: '1F. Floor plan',
         description: '물결 모양의 조명, 격자 패턴으로 조합된 DP집기는 \n플리츠마마의 직물이 서로 엮인 형태를 연상시킵니다.\n',
+        enDescription: 'Wave-shaped lighting and grid-patterned display fixtures evoke the interwoven structure of PLEATS MAMA textiles.',
         marker: {
           size: {
             x: 71.27127385250128,
@@ -113,6 +114,7 @@
         },
         floorLabel: '2F. Floor plan',
         description: '플리츠마마 가방 소재를 연상시키는 천으로 제작된\n해먹과 길게 늘어뜨린 실들이 해먹 간 가림막 역할을 하며, 고객들은 자유롭게 누워 휴식을 취할 수 있습니다. ',
+        enDescription: 'Hammocks made from fabric reminiscent of PLEATS MAMA bags invite visitors to lie down and rest. Long suspended threads form soft partitions between them.',
         marker: {
           size: {
             x: 73.34452540457825,
@@ -173,6 +175,7 @@
         },
         floorLabel: '2F. Floor plan',
         description: '메인 기둥 DP 존을 중심으로 플리츠마마의 가방이 진열되어 있습니다. 공간 분리를 해주는 체인이, 오로지 플리츠 마마의 제품에만 집중할 수 있도록 돕는 역할을 합니다.',
+        enDescription: 'PLEATS MAMA bags are displayed around the central column display zone. Chain partitions define the space and direct attention toward the products.',
         marker: {
           size: {
             x: 69.28323591427123,
@@ -233,6 +236,7 @@
         },
         floorLabel: '1F. Floor plan',
         description: '플리츠 스토어에서 나가기 전, 빔프로젝터에 상영되는\n플리츠마마의 브랜드 히스토리를 시청할 수 있습니다.\n뒷편에서는 스토어의 경험을 기록할 수 있는 키오스크가 배치되어 있습니다.',
+        enDescription: 'Before leaving, visitors can watch PLEATS MAMA’s brand story projected on screen. A kiosk behind the viewing area allows them to record their experience.',
         marker: {
           size: {
             x: 42.74368231046931,

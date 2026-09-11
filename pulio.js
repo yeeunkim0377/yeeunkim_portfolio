@@ -28,5 +28,17 @@
     video.src = asset.src;
     video.poster = asset.poster;
   });
+
+  const workflowObjects = [...document.querySelectorAll('object[data-workflow]')];
+  const syncWorkflowLanguage = () => {
+    const language = window.PortfolioI18n?.getLanguage() || document.documentElement.lang;
+    workflowObjects.forEach((object) => {
+      window.PulioCore.translateWorkflowDocument(object.contentDocument, language);
+    });
+  };
+  workflowObjects.forEach((object) => object.addEventListener('load', syncWorkflowLanguage));
+  document.addEventListener('portfolio:languagechange', syncWorkflowLanguage);
+  syncWorkflowLanguage();
+
   window.PulioCore.bindClickToPlay(document);
 })();

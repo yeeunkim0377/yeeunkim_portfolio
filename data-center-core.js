@@ -75,6 +75,14 @@
     return Math.max(0, image.x + image.w - item.x);
   }
 
+  function detailLocalizedValue(item, property, language) {
+    if (!item) return undefined;
+    const localizedProperty = `en${property[0].toUpperCase()}${property.slice(1)}`;
+    return language === 'en' && item[localizedProperty] != null
+      ? item[localizedProperty]
+      : item[property];
+  }
+
   function detailImageFillBounds(frame, transform) {
     if (!frame || !transform || transform.m00 <= 0 || transform.m11 <= 0) {
       throw new TypeError('image fill frame and scale must be positive');
@@ -114,5 +122,5 @@
     return Number((imageHeight * (expandedScale - 1) / 2).toFixed(4));
   }
 
-  return { nextTrackIndex, settleTrackIndex, nextFloorIndex, previousFloorIndex, floorIndexOf, shouldCloseDetail, isTopFloor, isBottomFloor, detailCanvasScale, detailTextWhiteSpace, detailTextWidth, detailImageFillBounds, togglePhysicalModelSelection, physicalModelDescriptionId, physicalModelDescriptionShiftX, physicalModelDescriptionShiftY };
+  return { nextTrackIndex, settleTrackIndex, nextFloorIndex, previousFloorIndex, floorIndexOf, shouldCloseDetail, isTopFloor, isBottomFloor, detailCanvasScale, detailTextWhiteSpace, detailTextWidth, detailLocalizedValue, detailImageFillBounds, togglePhysicalModelSelection, physicalModelDescriptionId, physicalModelDescriptionShiftX, physicalModelDescriptionShiftY };
 }));

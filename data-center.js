@@ -194,7 +194,12 @@
       const page = document.createElement('div');
       page.className = 'dc-floor-detail-page';
       page.dataset.detailFloor = frame.id;
+      const language = window.PortfolioI18n?.getLanguage() || document.documentElement.lang;
       frame.items.forEach((item) => {
+        const itemX = core.detailLocalizedValue(item, 'x', language);
+        const itemY = core.detailLocalizedValue(item, 'y', language);
+        const itemW = core.detailLocalizedValue(item, 'w', language);
+        const itemH = core.detailLocalizedValue(item, 'h', language);
         let element;
         const isFloorTitle = item.type === 'text' && /^[\w-]+f\./i.test(item.text || '');
         const isCenteredUpsText = item.type === 'text' && item.centerInParent === true;
@@ -224,7 +229,8 @@
           element.style.fontWeight = item.weight;
           element.style.color = item.color;
           if (item.textAlign) element.style.textAlign = item.textAlign;
-          element.style.whiteSpace = core.detailTextWhiteSpace(item);
+          element.style.whiteSpace = core.detailLocalizedValue(item, 'whiteSpace', language)
+            || core.detailTextWhiteSpace(item);
         } else if (item.type === 'dash-line') {
           element = document.createElement('span');
           element.className = 'dc-floor-detail-dash-line';
@@ -286,10 +292,10 @@
           return;
         }
         element.className = `dc-floor-detail-item dc-floor-detail-item--${item.type}`;
-        element.style.left = `${item.x}px`;
-        element.style.top = `${item.y}px`;
-          element.style.width = `${core.detailTextWidth(item, frame.items)}px`;
-        element.style.height = `${item.h}px`;
+        element.style.left = `${itemX}px`;
+        element.style.top = `${itemY}px`;
+        element.style.width = `${itemW !== item.w ? itemW : core.detailTextWidth(item, frame.items)}px`;
+        element.style.height = `${itemH}px`;
         if (isCenteredUpsText) {
           element.classList.add('dc-floor-detail-item--centered');
           element.style.transform = 'none';
@@ -300,13 +306,13 @@
           const titlePadding = titleZone ? Math.max(0, item.x - titleZone.x) : 4.5;
           const floorTitleTop = frame.id === 'floor-8' && titleZone
             ? titleZone.y + titleZone.h
-            : item.y - titlePadding;
+            : itemY - titlePadding;
           const verticalPadding = frame.id === 'floor-8' && titleZone
-            ? item.y - floorTitleTop
+            ? itemY - floorTitleTop
             : titlePadding;
           element.style.left = `${item.x - titlePadding}px`;
           element.style.top = `${floorTitleTop}px`;
-          element.style.width = `${item.w + titlePadding * 2}px`;
+          element.style.width = `${itemW + titlePadding * 2}px`;
           element.style.height = `${item.h + verticalPadding * 2}px`;
           element.style.padding = `${verticalPadding}px ${titlePadding}px`;
           element.style.whiteSpace = 'nowrap';

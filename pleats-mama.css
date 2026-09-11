@@ -9,6 +9,11 @@ html{background:var(--pleats-paper)}
 .pleats-layer-image-fill{position:absolute;display:block;max-width:none}
 .pleats-layer--svg{overflow:visible}
 .pleats-layer--ellipse{border-radius:50%}
+.pleats-site-badge{width:max-content!important;height:auto!important;padding:11px!important;box-sizing:border-box}
+.pleats-site-badge__text{position:static;width:max-content!important;height:auto!important;transform:none!important;white-space:nowrap}
+.pleats-concept-copy-title,.pleats-concept-copy-body{width:655px!important;height:auto!important;text-align:center}
+.pleats-concept-copy-title{transform:matrix(1,0,0,1,706.23046875,1476.6453857421875)!important}
+html[lang="en"] .pleats-guide-small-copy{display:none}
 [data-figma-id="24:21"]{overflow:visible}
 [data-figma-id="24:21"]::before{content:"▪";position:absolute;left:-22px;top:0;font:inherit;color:inherit}
 [data-figma-id="24:6"]{cursor:zoom-in;pointer-events:auto}

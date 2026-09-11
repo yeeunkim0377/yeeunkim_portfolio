@@ -19,6 +19,13 @@ test('Figma card-detail frames map top-to-bottom to November, June, October, and
   assert.deepEqual(Array.from(frames, (frame) => frame.texts.length), [6, 6, 6, 6]);
 });
 
+test('June English description breaks after exams into two lines', () => {
+  const translations = read('i18n-translations.js');
+
+  assert.match(translations, /'hyundai\.june': 'For June, when many mentees were taking exams,\\nI designed a layout inspired by exam papers\.'/);
+  assert.match(css, /\.hyundai-card-detail-text\{[^}]*white-space:pre-wrap/);
+});
+
 test('each existing Hyundai card opens its corresponding in-page detail overlay', () => {
   for (const id of ['april', 'june', 'october', 'november']) {
     assert.match(html, new RegExp(`class="hyundai-card-news[^\"]*"[^>]*data-card-detail="${id}"`));
