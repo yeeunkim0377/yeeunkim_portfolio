@@ -61,6 +61,7 @@ projects.forEach((button) => {
   const recent = [];
   let deck = [];
   let mode = 'pulio';
+  let reelVisible = false;
 
   const nextNumber = () => {
     if (!deck.length) deck = core.createDeck(47, 10, Math.random, recent.slice(-3));
@@ -73,7 +74,7 @@ projects.forEach((button) => {
   const createPulioImage = () => {
     const number = String(nextNumber()).padStart(2, '0');
     const image = document.createElement('img');
-    image.src = `assets/pulio/da/da-${number}.png`;
+    window.PortfolioMedia.image(image, `assets/pulio/da/da-${number}.png`, false);
     image.alt = '';
     image.decoding = 'async';
     image.loading = 'eager';
@@ -84,7 +85,7 @@ projects.forEach((button) => {
     const frame = document.createElement('span');
     const image = document.createElement('img');
     frame.className = 'data-center-reel-image';
-    image.src = `assets/data-center/scroll/${item.file}`;
+    window.PortfolioMedia.image(image, `assets/data-center/scroll/${item.file}`, false);
     image.alt = '';
     image.decoding = 'async';
     image.loading = 'eager';
@@ -95,7 +96,7 @@ projects.forEach((button) => {
   const createHyundaiImage = (item) => {
     const image = document.createElement('img');
     image.className = 'hyundai-reel-image';
-    image.src = `assets/hyundai/scroll/${item.file}`;
+    window.PortfolioMedia.image(image, `assets/hyundai/scroll/${item.file}`, false);
     image.alt = '';
     image.decoding = 'async';
     image.loading = 'eager';
@@ -105,7 +106,7 @@ projects.forEach((button) => {
   const createPleatsImage = (item) => {
     const image = document.createElement('img');
     image.className = 'pleats-reel-image';
-    image.src = `assets/pleats-mama/scroll/${item.file}`;
+    window.PortfolioMedia.image(image, `assets/pleats-mama/scroll/${item.file}`, false);
     image.alt = '';
     image.decoding = 'async';
     image.loading = 'eager';
@@ -118,6 +119,7 @@ projects.forEach((button) => {
   };
 
   const fillPulio = () => {
+    if (!reelVisible || mobileViewport.matches) return;
     mode = 'pulio';
     stop();
     track.replaceChildren();
@@ -128,6 +130,7 @@ projects.forEach((button) => {
   };
 
   const fillDataCenter = () => {
+    if (!reelVisible || mobileViewport.matches) return;
     if (mode === 'data-center') return;
     mode = 'data-center';
     stop();
@@ -139,6 +142,7 @@ projects.forEach((button) => {
   };
 
   const fillHyundai = () => {
+    if (!reelVisible || mobileViewport.matches) return;
     if (mode === 'hyundai') return;
     mode = 'hyundai';
     stop();
@@ -150,6 +154,7 @@ projects.forEach((button) => {
   };
 
   const fillPleats = () => {
+    if (!reelVisible || mobileViewport.matches) return;
     if (mode === 'pleats') return;
     mode = 'pleats';
     stop();
@@ -161,6 +166,7 @@ projects.forEach((button) => {
   };
 
   const advance = () => {
+    if (!reelVisible || document.hidden || reducedMotion.matches || mobileViewport.matches) return;
     const firstImage = track.firstElementChild;
     if (!firstImage) return;
     const distance = firstImage.getBoundingClientRect().height + 20;
@@ -170,6 +176,7 @@ projects.forEach((button) => {
 
   track.addEventListener('transitionend', (event) => {
     if (event.propertyName !== 'transform') return;
+    if (!reelVisible || document.hidden || reducedMotion.matches || mobileViewport.matches) return;
     const firstImage = track.firstElementChild;
     track.style.transition = 'none';
     track.style.transform = 'translateY(0)';
@@ -203,7 +210,25 @@ projects.forEach((button) => {
     project.addEventListener('focus', fillPleats);
   });
 
-  fillPulio();
+  const syncReelPlayback = () => {
+    if (!reelVisible || document.hidden || mobileViewport.matches) { stop(); return; }
+    if (!track.children.length) fillPulio();
+    else if (reducedMotion.matches) stop();
+    else advance();
+  };
+  if ('IntersectionObserver' in window) {
+    const reelObserver = new IntersectionObserver((entries) => {
+      reelVisible = entries.some(entry => entry.isIntersecting);
+      syncReelPlayback();
+    }, { rootMargin: '200px 0px' });
+    reelObserver.observe(reel);
+  } else {
+    reelVisible = true;
+    syncReelPlayback();
+  }
+  document.addEventListener('visibilitychange', syncReelPlayback);
+  mobileViewport.addEventListener('change', syncReelPlayback);
+  reducedMotion.addEventListener('change', syncReelPlayback);
 })();
 
 const infoSections = document.querySelectorAll('.info-section');

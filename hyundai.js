@@ -16,7 +16,7 @@
   function loadReelPosters() {
     reels.forEach((video) => {
       if (!video.dataset.poster) return;
-      video.poster = video.dataset.poster;
+      window.PortfolioMedia.poster(video, video.dataset.poster);
       delete video.dataset.poster;
     });
   }
@@ -115,7 +115,7 @@
       frame.images.forEach((item) => {
         const image = document.createElement('img');
         image.className = 'hyundai-card-detail-image';
-        image.src = item.src;
+        window.PortfolioMedia.image(image, item.src, false);
         image.alt = item.alt;
         image.decoding = 'async';
         image.style.left = `${item.x}px`;

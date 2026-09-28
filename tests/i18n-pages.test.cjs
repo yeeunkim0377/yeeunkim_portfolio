@@ -62,6 +62,11 @@ test('mobile work heading stays above a spaced black project list', () => {
   assert.match(css, /\.projects \.project,\.projects \.project strong,\.projects \.project span\{color:var\(--ink\)\}/);
 });
 
+test('mobile work removes the preview image section entirely', () => {
+  const css = read('styles.css');
+  assert.match(css, /@media\(max-width:520px\)\{\.work>\.preview\{display:none\}/);
+});
+
 test('translation application does not rewrite unchanged HTML and retrigger its observer', () => {
   const core = read('i18n-core.js');
   assert.match(core, /if \(node\.innerHTML !== translated\) node\.innerHTML = translated/);

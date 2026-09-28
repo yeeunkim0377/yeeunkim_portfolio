@@ -205,7 +205,7 @@
         const isCenteredUpsText = item.type === 'text' && item.centerInParent === true;
         if (item.type === 'image') {
           const image = document.createElement('img');
-          image.src = item.src;
+          window.PortfolioMedia.image(image, item.src, false);
           image.alt = item.alt || '';
           if (item.fillTransform) {
             const bounds = core.detailImageFillBounds(item, item.fillTransform);
@@ -247,7 +247,7 @@
           element = document.createElement('span');
           item.children.forEach((child) => {
             const image = document.createElement('img');
-            image.src = child.src;
+            window.PortfolioMedia.image(image, child.src, false);
             image.alt = child.alt || '';
             if (child.image) {
               const part = document.createElement('span');

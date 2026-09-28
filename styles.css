@@ -25,3 +25,4 @@ html.interactive-cursor-active,html.interactive-cursor-active *{cursor:none!impo
 .language-switcher button:focus-visible{position:relative;z-index:1;outline:2px solid #000;outline-offset:-2px}
 @media(max-width:520px){.hero h1{font-size:30px}}
 @media(max-width:520px){.projects h2{position:static;margin:0 0 48px}.projects .project,.projects .project strong,.projects .project span{color:var(--ink)}}
+@media(max-width:520px){.work>.preview{display:none}.work{padding-top:72px}}

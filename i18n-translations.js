@@ -1,6 +1,10 @@
 (function () {
   const dictionary = {
     ko: {
+      "pulio.plus.performanceTitle": "2026-3분기 메가와리 고성과 소재",
+      "pulio.plus.performanceDescription": "2026-3분기 메가와리 SNS광고 소재를 제작했습니다.<br>조회수 및 전환율 상위 5개에 꼽힌 소재들입니다.<br>이전 제작 경험을 토대로 핑크 - 보라 색감의 소재를 제작했고, 전환율 1000%이상을 달성하는 성과를 보이기도 했습니다.",
+      "pulio.plus.conceptTitle": "기획 콘텐츠",
+      "pulio.plus.conceptDescription": "일본 MZ 유행 밈 ‘好きすぎて滅！’ (너무 좋아해서 사라짐!) 활용해 ‘強すぎて滅！’(너무 강해서 사라짐!)을 활용한 콘텐츠를 제작해보았습니다.<br><br>가을 시즌의 마라톤 수요에 주목해, 러닝 후 종아리 케어라는 제품 사용 맥락을 활용한 시즌형 캐러셀 콘텐츠를 기획했습니다.",
       'common.language.label': '언어 선택', 'meta.title': '김예은 — Designer',
       'home.hero.tagline': '픽셀 단위로 섬세하게,<br>본질만 선명하게.', 'home.hero.role': 'Designer 김예은',
       'home.hero.spatialRole': 'Spatial Designer 김예은', 'home.pulio.role': 'sns content design assistant',
@@ -70,6 +74,10 @@
       'dc.droneExhibit': '드론으로 데이터를 수집하는 방식을 전시하는 공간입니다.', 'dc.droneRoute': '외부 수집을 마치고 돌아오는 드론의 이동 통로입니다. 투명한 파이프를 통해 활발한 정보 수집 활동을 확인할 수 있습니다.'
     },
     en: {
+      "pulio.plus.performanceTitle": "Q3 2026 Megawari: Top-performing Creative",
+      "pulio.plus.performanceDescription": "I created social media ads for the Q3 2026 Megawari sale. These five creatives ranked among the top performers for views and conversion rate. Building on previous work, I used pink and purple palettes; some creatives achieved a reported conversion rate of over 1,000%.",
+      "pulio.plus.conceptTitle": "Content Concepts",
+      "pulio.plus.conceptDescription": "I adapted the Japanese meme ????????? (I like it so much I could disappear!) into ???????? (So powerful I could disappear!) for a content concept.<br><br>For the autumn marathon season, I planned carousel content around calf care after running, highlighting a seasonal use case for the product.",
       'common.language.label': 'Select language', 'meta.title': 'Yeeun Kim — Designer',
       'home.hero.tagline': 'Refined to the pixel.<br>Focused on what matters.', 'home.hero.role': 'Yeeun Kim, Designer',
       'home.hero.spatialRole': 'Yeeun Kim, Spatial Designer', 'home.pulio.role': 'Social media content designer',

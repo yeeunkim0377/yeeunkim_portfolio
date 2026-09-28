@@ -101,7 +101,7 @@
       element.className = 'pleats-layer pleats-layer--image-frame';
       const image = document.createElement('img');
       image.className = 'pleats-layer-image-fill';
-      image.src = layer.src;
+      window.PortfolioMedia.image(image, layer.src);
       image.alt = '';
       image.decoding = 'async';
       if (layer.imageScaleMode === 'STRETCH' && layer.fillTransform) {
@@ -231,7 +231,7 @@
 
   function preparePerspectiveImage(image, slide) {
     image.className = 'pleats-perspective';
-    image.src = slide.main.src;
+    window.PortfolioMedia.image(image, slide.main.src, image.loading === 'lazy');
     image.alt = `PLEATS MAMA ${slide.floorLabel.replace('. Floor plan', '')} 공간 투시도`;
     image.decoding = 'async';
     image.style.left = `${slide.main.transform.m02 - perspectiveOrigin.x}px`;
@@ -248,7 +248,7 @@
       planFrame.style.transform = matrix(slide.plan.transform);
     }
     if (planImage) {
-      planImage.src = slide.plan.src;
+      window.PortfolioMedia.image(planImage, slide.plan.src);
       planImage.alt = slide.floorLabel;
       if (slide.plan.imageScaleMode === 'STRETCH' && slide.plan.fillTransform) {
         const bounds = core.imageFillBounds(slide.plan.size, slide.plan.fillTransform);

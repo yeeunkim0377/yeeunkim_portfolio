@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Gorditas&display=swap');
 :root{--dc-paper:#fffaf9;--dc-date:#c3c3c3;--dc-label:#757575;--dc-copy:#1e1e1e}
 .data-center-body{min-width:1440px;overflow-x:auto;background:var(--dc-paper)}
 .data-center-main{width:1440px;margin:0 auto;overflow:visible}
