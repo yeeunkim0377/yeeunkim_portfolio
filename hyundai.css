@@ -1,6 +1,6 @@
 :root{--hyundai-paper:#fffaf9;--hyundai-date:#c3c3c3;--hyundai-muted:#757575}
 .hyundai-body{min-width:1440px;overflow-x:auto;background:var(--hyundai-paper)}
-.hyundai-canvas{position:relative;width:1440px;height:2252px;margin:0 auto;overflow:hidden;background:var(--hyundai-paper);color:#000;font-family:'Gothic A1',sans-serif;font-weight:400}
+.hyundai-canvas{position:relative;width:1440px;height:5400px;margin:0 auto;overflow:hidden;background:var(--hyundai-paper);color:#000;font-family:'Gothic A1',sans-serif;font-weight:400}
 .hyundai-canvas section{position:absolute;padding:0}
 .hyundai-intro{left:145.638px;top:201.548px;width:1124.176px;height:148.032px}
 .hyundai-title{margin:0;font-size:50px;line-height:53.032px;font-weight:500;letter-spacing:0}
@@ -54,3 +54,16 @@
 @keyframes hyundai-card-detail-reveal{from{opacity:0}to{opacity:1}}
 .hyundai-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hyundai-card-detail.is-opening{animation:none}}
+
+.hyundai-reel-case{left:0;width:1440px;height:1324px;font-family:"Gothic A1",sans-serif}
+.hyundai-fig-layer,.hyundai-reel-case>.hyundai-reel,.hyundai-fig-layer>.hyundai-reel{position:absolute;left:0;top:0;margin:0;transform-origin:0 0}
+.hyundai-fig-layer img{position:absolute;display:block;max-width:none}
+.hyundai-fig-text{white-space:pre;overflow:visible}
+.hyundai-reel-case .hyundai-reel{object-fit:cover;background:#000}
+
+html[lang="en"] .hyundai-fig-text[data-i18n]{white-space:pre-wrap}
+html[lang="en"] .hyundai-fig-text:is([data-figma-id="5:396"],[data-figma-id="5:401"],[data-figma-id="5:491"],[data-figma-id="5:495"],[data-figma-id="5:594"],[data-figma-id="5:595"]){width:722px!important}
+
+.hyundai-reel-views{position:absolute;top:760.6235px;display:flex;align-items:center;gap:15px;width:max-content;transform:translateX(-50%);color:var(--hyundai-muted)}
+.hyundai-reel-views .hyundai-view-icon{position:static;flex:none}
+.hyundai-reel-views p{margin:0;font-family:'Google Sans Flex','Gothic A1',sans-serif;font-size:50px;font-weight:500;line-height:63px;white-space:nowrap}

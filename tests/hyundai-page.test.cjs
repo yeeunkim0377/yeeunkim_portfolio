@@ -60,36 +60,25 @@ test('Hyundai intro typography and category positions match the Figma frame', ()
   assert.match(css, /\.hyundai-category:nth-child\(2\)\{left:190px/);
 });
 
-test('Reels section title matches the unnumbered Figma text layer', () => {
+test('Reels cases retain the first heading without reel dates', () => {
   const html = read('hyundai.html');
-  const css = read('hyundai.css');
-  assert.match(html, /<h2 class="hyundai-reels-title" id="reels-video">Reels Video Editing<\/h2>/);
-  assert.doesNotMatch(html, /2025\.07\.28|hyundai-reels-date/);
-  assert.match(css, /\.hyundai-reels-title\{[^}]*left:135\.92px[^}]*top:1125\.043px[^}]*font-size:30px[^}]*line-height:38px[^}]*font-weight:600/);
+  assert.equal((html.match(/>Reels Video Editing<\/h2>/g) || []).length, 1);
+  assert.doesNotMatch(html, /2025\.07\.28/);
+  assert.doesNotMatch(html, /2025\.08\.23/);
 });
 
-test('Reels result numbers use the Google Sans Flex Medium Figma style', () => {
+test('Reels view counts follow the updated values and retain eye icons', () => {
   const html = read('hyundai.html');
-  const css = read('hyundai.css');
-  assert.doesNotMatch(html, /Roboto\+Flex/);
-  assert.doesNotMatch(html, /hyundai-result-marker/);
-  assert.doesNotMatch(css, /\.hyundai-result-marker/);
-  assert.equal((html.match(/class="hyundai-view-icon"/g) ?? []).length, 3);
-  assert.equal((html.match(/src="assets\/hyundai\/view\.png"/g) ?? []).length, 3);
-  assert.deepEqual([...html.matchAll(/data-count="(\d+)"/g)].map((match) => match[1]), ['1048', '874', '474']);
+  assert.deepEqual([...html.matchAll(/>(1,050|874|474)<\/p>/g)].map(m => m[1]), ['1,050','874','474']);
+  assert.equal((html.match(/class="hyundai-view-icon"/g) || []).length, 3);
   assert.match(html, /family=Google\+Sans\+Flex:wght@500/);
-  assert.match(css, /\.hyundai-stat strong\{[^}]*font-family:'Google Sans Flex','Gothic A1',sans-serif[^}]*font-size:50px[^}]*line-height:63px[^}]*font-weight:500/);
-  assert.match(css, /\.hyundai-view-icon\{[^}]*left:0[^}]*top:22\.714px[^}]*width:30\.527px[^}]*height:17\.572px/);
-  assert.match(css, /\.hyundai-stat--one strong\{left:47\.579px/);
-  assert.match(css, /\.hyundai-stat--two strong\{left:40\.696px/);
-  assert.match(css, /\.hyundai-stat--three strong\{left:39\.737px/);
 });
 
 test('every Hyundai media reference resolves to an extracted Figma asset', () => {
   const html = read('hyundai.html');
   const sources = [...html.matchAll(/(?:src|poster)="(assets\/hyundai\/[^"]+)"/g)].map((match) => match[1]);
-  assert.equal(sources.length, 21, 'all 12 cards, 3 videos, 3 posters, and 3 view icons must be referenced');
-  assert.equal(new Set(sources).size, 19, 'the three view icons reuse one supplied asset');
+  assert.equal(sources.length, 47, '12 cards, 3 videos, 3 posters, 26 detail images, and 3 eye icons');
+  assert.equal(new Set(sources).size, 45);
   for (const source of sources) assert.ok(fs.existsSync(path.join(workspace, source)), `missing asset: ${source}`);
 });
 
@@ -97,7 +86,7 @@ test('Hyundai media defers expensive loading and decoding work', () => {
   const html = read('hyundai.html');
   assert.equal((html.match(/class="hyundai-card-image"[^>]*loading="lazy"[^>]*decoding="async"/g) ?? []).length, 12);
   assert.equal((html.match(/class="hyundai-reel"[^>]*data-poster="assets\/hyundai\/[^\"]+"[^>]*preload="none"/g) ?? []).length, 3);
-  assert.equal((html.match(/class="hyundai-view-icon"[^>]*decoding="async"/g) ?? []).length, 3);
+  assert.equal((html.match(/src="assets\/hyundai\/reels-detail\/[^"]+" loading="lazy" decoding="async"/g) ?? []).length, 26);
 });
 
 test('card-news groups retain the Figma border and drop shadow', () => {

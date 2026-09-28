@@ -26,3 +26,14 @@ html.interactive-cursor-active,html.interactive-cursor-active *{cursor:none!impo
 @media(max-width:520px){.hero h1{font-size:30px}}
 @media(max-width:520px){.projects h2{position:static;margin:0 0 48px}.projects .project,.projects .project strong,.projects .project span{color:var(--ink)}}
 @media(max-width:520px){.work>.preview{display:none}.work{padding-top:72px}}
+
+/* About introduction beside the portrait, with credentials below. */
+.about-grid{column-gap:clamp(48px,5.56vw,80px);row-gap:90px;align-items:start}
+.about-intro{align-self:center;font-family:'Gothic A1',sans-serif;font-size:16px;font-weight:400;line-height:1.95;word-break:keep-all;overflow-wrap:break-word}
+.about-intro p{margin:0}
+.about-intro strong{font-weight:700}
+.about-intro .about-intro-heading{font-size:22px;line-height:1.5;margin-bottom:28px}
+.about-intro .about-intro-direction{margin-top:32px;margin-bottom:12px}
+.about-grid>.profile{grid-column:1/-1;width:100%;max-width:none;padding-top:0}
+@media(max-width:1050px){.about-grid{row-gap:80px}.about-intro{max-width:760px;justify-self:center}.about-grid>.profile{grid-column:1}}
+@media(max-width:520px){.about-intro{font-size:15px}.about-intro .about-intro-heading{font-size:20px}.about-intro br{display:none}}
